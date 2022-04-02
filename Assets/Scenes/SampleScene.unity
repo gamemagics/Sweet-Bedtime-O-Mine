@@ -192,7 +192,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -4548,6 +4548,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[1].x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[1].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[2].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158427067941876938, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[2].y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371597250576268566, guid: 7835291b232e1c743b5aafd3fff013f6,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7580184429591605236, guid: 7835291b232e1c743b5aafd3fff013f6,
         type: 3}
       propertyPath: m_Name
@@ -4556,12 +4596,12 @@ PrefabInstance:
     - target: {fileID: 7580184429591605237, guid: 7835291b232e1c743b5aafd3fff013f6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.06
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 7580184429591605237, guid: 7835291b232e1c743b5aafd3fff013f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.07
+      value: -1.02
       objectReference: {fileID: 0}
     - target: {fileID: 7580184429591605237, guid: 7835291b232e1c743b5aafd3fff013f6,
         type: 3}
@@ -4692,5 +4732,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4477799071556548367, guid: ed49e616b7ca08b478d757a3689909a4,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 8b8295786aa062344beb4c24e989c372,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed49e616b7ca08b478d757a3689909a4, type: 3}
