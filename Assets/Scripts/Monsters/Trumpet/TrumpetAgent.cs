@@ -9,6 +9,8 @@ public class TrumpetAgent : MonoBehaviour {
     private NavMeshAgent agent;
     private Animator animator;
 
+    private TrumpetAttack trumpetAttack;
+
     private GameObject player = null;
 
     private TrumpetState state = TrumpetState.IDLE;
@@ -23,6 +25,7 @@ public class TrumpetAgent : MonoBehaviour {
         random = new System.Random((int)Time.time);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        trumpetAttack = GetComponent<TrumpetAttack>();
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -82,9 +85,21 @@ public class TrumpetAgent : MonoBehaviour {
             state = TrumpetState.IDLE;
         }
         else {
-
+            Vector2 direction = player.transform.position - transform.position;
+            direction.Normalize();
+            trumpetAttack.Attack(direction);
         }
     }
 
-    
+    void OnTriggerEnter2D(Collider2D collider) {
+        if (collider.gameObject.tag == "Player") {
+            player = collider.gameObject;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider) {
+        if (collider.gameObject.tag == "Player") {
+            player = null;
+        }
+    }
 }
