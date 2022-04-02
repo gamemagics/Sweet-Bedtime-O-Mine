@@ -81,5 +81,10 @@ public class TrumpetAgent : MonoBehaviour {
             animator.SetFloat("Wait", WAIT_TIME);
             state = TrumpetState.IDLE;
         }
+        else {
+
+        }
     }
+
+    
 }
