@@ -24,7 +24,7 @@ public class DigitalClockAgent : MonoBehaviour {
 
     [SerializeField] private int HP = 1;
 
-    [SerializeField] private Text text;
+    [SerializeField] private Text text = null;
 
     void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -50,6 +50,10 @@ public class DigitalClockAgent : MonoBehaviour {
     void UpdateRun() {
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
+        if (direction.x * transform.localScale.x < 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        
         transform.Translate(-direction * SPEED * Time.deltaTime);
 
         if (HP <= 0) {

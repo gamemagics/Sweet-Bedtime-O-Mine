@@ -72,6 +72,9 @@ public class ElectricDrillAgent : MonoBehaviour {
 
     void UpdateRush() {
         transform.Translate(direction * SPEED * Time.deltaTime);
+        if (direction.x * transform.localScale.x > 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider) {

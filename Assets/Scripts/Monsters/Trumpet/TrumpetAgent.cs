@@ -76,12 +76,17 @@ public class TrumpetAgent : MonoBehaviour {
     }
 
     void UpdateWalk() {
-        Vector2 dis = agent.destination - transform.position;
+        Vector2 dis = agent.destination - transform.position; 
+
         if (Vector2.Distance(agent.destination, transform.position) < 0.1f || player != null) {
             animator.SetFloat("Wait", WAIT_TIME);
             animator.SetTrigger("Stop");
             agent.SetDestination(transform.position);
             state = TrumpetState.IDLE;
+        }
+
+        if (agent.velocity.x * transform.localScale.x > 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
@@ -93,6 +98,10 @@ public class TrumpetAgent : MonoBehaviour {
         }
         else {
             Vector2 direction = player.transform.position - transform.position;
+            if (direction.x * transform.localScale.x > 0) {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            }
+
             direction.Normalize();
             trumpetAttack.Attack(direction);
         }

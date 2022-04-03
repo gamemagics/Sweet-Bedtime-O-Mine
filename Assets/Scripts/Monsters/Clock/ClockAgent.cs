@@ -55,14 +55,21 @@ public class ClockAgent : MonoBehaviour {
             Debug.Log(player.transform.position);
             agent.SetDestination(player.transform.position);
         }
+
+        if (agent.velocity.x * transform.localScale.x > 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
     }
 
     void UpdateAttack() {
+        Vector2 direction = player.transform.position - transform.position;
+        direction.Normalize();
+        if (direction.x * transform.localScale.x > 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack")) {
-            Vector2 direction = player.transform.position - transform.position;
-            direction.Normalize();
-
             GameObject bullet = GameObject.Instantiate<GameObject>(bulletPrefab);
             bullet.transform.position = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, transform.position.z);
             ClockBullet clockBullet = bullet.GetComponent<ClockBullet>();
