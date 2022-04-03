@@ -41,9 +41,7 @@ public class TrumpetAttackCircle : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        Debug.Log(collider.name);
-        
-        if (collider.tag != "EnemySearch") {
+        if (collider.tag != "EnemySearch" && collider.tag != "EnemyDamage") {
             // TODO:
             Destroy(gameObject);
         }
