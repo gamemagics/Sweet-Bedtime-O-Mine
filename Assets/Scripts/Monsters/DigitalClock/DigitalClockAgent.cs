@@ -22,6 +22,8 @@ public class DigitalClockAgent : MonoBehaviour {
 
     private static readonly float SPEED = 0.5f;
 
+    private static readonly float RUN_DISTANCE = 4f;
+
     [SerializeField] private int HP = 1;
 
     [SerializeField] private Text text = null;
@@ -54,7 +56,9 @@ public class DigitalClockAgent : MonoBehaviour {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
         
-        transform.Translate(-direction * SPEED * Time.deltaTime);
+        if (Vector2.Distance(player.transform.position, transform.position) <= RUN_DISTANCE) {
+            transform.Translate(-direction * SPEED * Time.deltaTime);
+        }
 
         if (HP <= 0) {
             animator.SetBool("Shut", true);
