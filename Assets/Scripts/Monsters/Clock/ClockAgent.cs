@@ -52,7 +52,6 @@ public class ClockAgent : MonoBehaviour {
         }
         else {
             animator.SetFloat("Interval", time);
-            Debug.Log(player.transform.position);
             agent.SetDestination(player.transform.position);
         }
 
