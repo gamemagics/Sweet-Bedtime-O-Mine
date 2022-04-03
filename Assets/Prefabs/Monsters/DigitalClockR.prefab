@@ -165,7 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  timeString: 00:00
   HP: 1
+  text: {fileID: 1547880407079547394}
 --- !u!1 &460671685849099442
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +239,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

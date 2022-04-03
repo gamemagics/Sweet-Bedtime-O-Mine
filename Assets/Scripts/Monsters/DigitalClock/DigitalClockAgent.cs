@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class DigitalClockAgent : MonoBehaviour {
@@ -18,13 +18,18 @@ public class DigitalClockAgent : MonoBehaviour {
 
     public UnityEvent<int> OnShutDown;
 
+    public string timeString = "00:00";
+
     private static readonly float SPEED = 0.5f;
 
     [SerializeField] private int HP = 1;
 
+    [SerializeField] private Text text;
+
     void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
+        text.text = timeString;
     }
 
     void Update() {
@@ -38,6 +43,8 @@ public class DigitalClockAgent : MonoBehaviour {
                 UpdateRestart();
                 break;
         }
+
+        UpdateTime();
     }
 
     void UpdateRun() {
@@ -58,6 +65,10 @@ public class DigitalClockAgent : MonoBehaviour {
             animator.SetTrigger("Restart");
             state = DigitalClockState.RUN;
         }
+    }
+
+    void UpdateTime() {
+        text.gameObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

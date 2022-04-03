@@ -118,7 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  timeString: 00:00
   HP: 1
+  text: {fileID: 1100778647154964452}
 --- !u!50 &7984354751423866168
 Rigidbody2D:
   serializedVersion: 4
