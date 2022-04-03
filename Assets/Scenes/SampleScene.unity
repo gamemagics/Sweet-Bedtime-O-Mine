@@ -725,7 +725,7 @@ PrefabInstance:
     - target: {fileID: 69795367748910162, guid: 0b61ff2f4e12e6646a021cc1d8ad6db7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 69795367748910162, guid: 0b61ff2f4e12e6646a021cc1d8ad6db7,
         type: 3}
@@ -4865,7 +4865,7 @@ PrefabInstance:
     - target: {fileID: 69795367748910162, guid: 849ef4716852e034cb9360a133b14a62,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 69795367748910162, guid: 849ef4716852e034cb9360a133b14a62,
         type: 3}
@@ -4901,6 +4901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DigitalClockR
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820532313973132886, guid: 849ef4716852e034cb9360a133b14a62,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 849ef4716852e034cb9360a133b14a62, type: 3}
@@ -4947,7 +4952,7 @@ Transform:
   - {fileID: 1094665435}
   - {fileID: 162522977}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1570166420
 PrefabInstance:
@@ -5030,6 +5035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DigitalClockY
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640711900561657801, guid: 3e72aada89564ff4aaa140d877e2b0ab,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e72aada89564ff4aaa140d877e2b0ab, type: 3}
