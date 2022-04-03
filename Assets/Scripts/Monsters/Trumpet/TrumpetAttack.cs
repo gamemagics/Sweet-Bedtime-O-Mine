@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrumpetAttack : MonoBehaviour {
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab = null;
 
     private static readonly float ATTACK_INTERVAL = 2.0f;
     private float timer = ATTACK_INTERVAL;
