@@ -21,6 +21,8 @@ public class TrumpetAgent : MonoBehaviour {
 
     public Vector2[] cruisePoint;
 
+    private int previousPoint = -1;
+
     void Awake() {
         random = new System.Random((int)Time.time);
         agent = GetComponent<NavMeshAgent>();
@@ -58,6 +60,11 @@ public class TrumpetAgent : MonoBehaviour {
         }
         else {
             int index = random.Next(0, cruisePoint.Length);
+            if (index == previousPoint) {
+                index = (index + 1) % cruisePoint.Length;
+            }
+
+            previousPoint = index;
             Vector2 dest = cruisePoint[index];
             agent.SetDestination(new Vector3(dest.x, dest.y, transform.position.z));
 

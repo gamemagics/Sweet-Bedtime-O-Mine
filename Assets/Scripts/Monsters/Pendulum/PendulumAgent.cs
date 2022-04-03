@@ -22,6 +22,7 @@ public class PendulumAgent : MonoBehaviour {
     private static readonly float ATTACK_RANGE = 0.8f;
 
     public Vector2[] cruisePoint;
+    private int previousPoint = -1;
 
     [SerializeField] private GameObject bombPrefab;
 
@@ -57,6 +58,11 @@ public class PendulumAgent : MonoBehaviour {
         }
         else {
             int index = random.Next(0, cruisePoint.Length);
+            if (index == previousPoint) {
+                index = (index + 1) % cruisePoint.Length;
+            }
+
+            previousPoint = index;
             Vector2 dest = cruisePoint[index];
             agent.SetDestination(new Vector3(dest.x, dest.y, transform.position.z));
 
