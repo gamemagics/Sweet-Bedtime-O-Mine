@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: Inteval
+    m_ConditionEvent: Interval
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5925929755696716376}
@@ -59,7 +59,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Inteval
+    m_ConditionEvent: Interval
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1047356092417563476}
@@ -164,7 +164,7 @@ AnimatorController:
   m_Name: Clock
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Inteval
+  - m_Name: Interval
     m_Type: 1
     m_DefaultFloat: 3
     m_DefaultInt: 0
