@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 315999809274036260}
   m_Layer: 0
   m_Name: Trumpet
-  m_TagString: Untagged
+  m_TagString: EnemySearch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7056bf42a2ce19a4fbda4b1521851b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2898445634620438187, guid: 43b6b19cb63b23e48a26d45f269a3a2f,
+    type: 3}
 --- !u!50 &315999809274036260
 Rigidbody2D:
   serializedVersion: 4
