@@ -763,6 +763,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &811351480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352229, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_Name
+      value: Monstergenerator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1a7ced023aa91c42953cf9567dafdea, type: 3}
 --- !u!1 &1094665434
 GameObject:
   m_ObjectHideFlags: 0
@@ -4652,12 +4721,12 @@ PrefabInstance:
     - target: {fileID: 624011895165572018, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8
+      value: -4.76
       objectReference: {fileID: 0}
     - target: {fileID: 624011895165572018, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.67
       objectReference: {fileID: 0}
     - target: {fileID: 624011895165572018, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
@@ -4723,6 +4792,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ClockQueen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456523618215908724, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].y
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b64b1c9be0bc934db0cd8955a4e56da, type: 3}
