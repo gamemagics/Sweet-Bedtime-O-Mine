@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9002660598933393780}
   - component: {fileID: 7885028057825492827}
   - component: {fileID: 8976134956154154530}
+  - component: {fileID: 3201613417448437778}
   m_Layer: 0
   m_Name: PendulumClock
   m_TagString: Untagged
@@ -112,8 +113,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.32
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1
+  m_Acceleration: 0.5
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -124,3 +125,18 @@ NavMeshAgent:
   m_BaseOffset: 0.32
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3201613417448437778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507702006237416756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c6481bced94bc4484482049935eaed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cruisePoint: []
+  bombPrefab: {fileID: 1243961734313396482, guid: 328e42faeabd1364b84e9fbff9ff0b03,
+    type: 3}
