@@ -10,6 +10,7 @@ public class MonsterDamageReceiver : MonoBehaviour {
             int dmg = collider.gameObject.GetComponent<ProjectileBehavior>().damage;
             HP -= dmg;
             if (HP <= 0) {
+                DungeonManager.Instance.ReportDeath();
                 Destroy(transform.parent.gameObject);
             }
         }

@@ -41,7 +41,7 @@ public class DigitalClockProxy : MonoBehaviour {
             }
 
             if (flag) {
-                // TODO:
+                DungeonManager.Instance.ReportDeath();
                 Destroy(gameObject);
             }
             else {
