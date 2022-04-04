@@ -98,7 +98,8 @@ public class PendulumAgent : MonoBehaviour {
             p *= ATTACK_RANGE * (float)random.NextDouble();
 
             GameObject bomb = GameObject.Instantiate<GameObject>(bombPrefab);
-            bomb.transform.position = new Vector3(transform.position.x + p.x, transform.position.y + p.y, transform.position.z);
+            bomb.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            bomb.GetComponentInChildren<Explore>().target = new Vector2(transform.position.x + p.x, transform.position.y + p.y);
             bomb.name = "bomb";
             bomb.tag = "EnemyAttack";
 

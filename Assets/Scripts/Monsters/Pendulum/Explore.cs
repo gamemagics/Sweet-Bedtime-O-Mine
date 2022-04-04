@@ -7,6 +7,8 @@ public class Explore : MonoBehaviour {
 
     private Animator animator = null;
 
+    public Vector2 target = Vector2.zero;
+
     void Awake() {
         animator = transform.parent.gameObject.GetComponent<Animator>();
     }
@@ -24,13 +26,13 @@ public class Explore : MonoBehaviour {
     }
 
     void Update() {
+        transform.position = Vector2.MoveTowards(transform.position, target, 100);
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Explore")) {
-            Debug.Log(1);
             DestroyImmediate(transform.parent.gameObject);
         }
         else if (info.normalizedTime >= 0.5f && info.IsName("Base Layer.Explore") && player != null) {
-            
+            // TODO:
         }
     }
 }

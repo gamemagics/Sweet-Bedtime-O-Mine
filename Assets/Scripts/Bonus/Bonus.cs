@@ -15,7 +15,7 @@ public class Bonus : MonoBehaviour {
     private bool done = false;
 
     void Awake() {
-        random = new System.Random((int)Time.time);
+        random = new System.Random(System.DateTime.Now.Second);
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
