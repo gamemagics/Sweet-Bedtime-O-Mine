@@ -59,6 +59,8 @@ public class DungeonManager : MonoBehaviour
             currentRoom = null;
         }
 
+        bool generateMonster = true;
+
         if (isBoss)
         {
             isBoss = false;
@@ -73,6 +75,7 @@ public class DungeonManager : MonoBehaviour
             {
                 currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
                 currentRoom.transform.position = Vector3.zero;
+                generateMonster = false;
             }
         }
         else if (roomNunber == layerRoomCount[layer])
@@ -96,7 +99,10 @@ public class DungeonManager : MonoBehaviour
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
-        GenerateMonsters();
+        
+        if (generateMonster) {
+            GenerateMonsters();
+        }
     }
 
     void GenerateMonsters()
