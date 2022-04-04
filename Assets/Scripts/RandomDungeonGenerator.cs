@@ -306,7 +306,7 @@ public class RandomDungeonGenerator : MonoBehaviour
             for (int tileY = y - radius; tileY <= y + radius; tileY++)
             {
                 Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
-                availablePosition.Add(grid.CellToWorld(tilePos));
+                availablePosition.Add(grid.CellToWorld(tilePos) + grid.cellSize / 2);
                 if (Random.Range(1, 100) >= deviationRate)
                 {
                     groundMap.SetTile(tilePos, groundTile[0]);

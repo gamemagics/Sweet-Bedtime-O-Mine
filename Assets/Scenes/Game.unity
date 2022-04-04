@@ -253,7 +253,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.014638454, y: -0.012772441}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -264,7 +264,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 0.5053262, y: 0.6144551}
   m_EdgeRadius: 0
 --- !u!114 &257250277
 MonoBehaviour:
@@ -1766,6 +1766,7 @@ MonoBehaviour:
   doorPrefab: {fileID: 3847191842694112279, guid: bac5430fd39a7bb4fb18d8c976a8483d,
     type: 3}
   door: {fileID: 892851276}
+  availablePosition: []
 --- !u!4 &1754744392
 Transform:
   m_ObjectHideFlags: 0

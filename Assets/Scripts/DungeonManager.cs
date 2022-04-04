@@ -81,14 +81,30 @@ public class DungeonManager : MonoBehaviour {
 
     void GenerateMonsters() {
         var type = (Monstergenerator.MonsterType)random.Next(0, 5);
+        type = Monstergenerator.MonsterType.ELECTRIC_DRILL;
+
         if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK) {
             remains = 1;
         }
         else {
             remains = 3;
+            int[] prev = new int[remains];
+            
             for (int i = 0; i < remains; ++i) {
                 GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
                 int posIndex = random.Next(0, generator.availablePosition.Count);
+                bool repeat = false;
+                do {
+                    repeat = false;
+                    for (int j = 0; j < i; ++j) {
+                        if (prev[j] == posIndex) {
+                            repeat = true;
+                            break;
+                        }
+                    }
+                }while(repeat);
+
+                prev[i] = posIndex;
                 Vector2 pos = generator.availablePosition[posIndex];
                 monster.transform.position = new Vector3(pos.x, pos.y, 0);
 

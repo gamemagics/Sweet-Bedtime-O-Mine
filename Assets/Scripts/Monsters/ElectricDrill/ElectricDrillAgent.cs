@@ -13,7 +13,7 @@ public class ElectricDrillAgent : MonoBehaviour {
 
     private GameObject player = null;
 
-    private static readonly float COLD_DOWN = 5.0f;
+    private static readonly float COLD_DOWN = 2.0f;
     private static readonly float SPEED = 5.0f;
 
     private Vector2 direction = Vector2.left;
@@ -53,7 +53,13 @@ public class ElectricDrillAgent : MonoBehaviour {
             if (res != null) {
                 for (int i = 0; i < res.Length; ++i) {
                     RaycastHit2D hit = res[i];
-                    if (hit.transform.gameObject.tag != "Player" && !hit.transform.gameObject.tag.Contains("Enemy")) {
+                    if (hit.transform.gameObject.tag.Contains("Enemy")) {
+                        continue;
+                    }
+                    else if (hit.transform.gameObject.tag == "Player") {
+                        break;
+                    }
+                    else {
                         Debug.Log(hit.transform.gameObject.name);
                         flag = false;
                         break;
