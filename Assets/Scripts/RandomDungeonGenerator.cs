@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class RandomDungeonGenerator : MonoBehaviour
 {
-
     enum wallIndex
     {
         topLeft = 0,
@@ -20,7 +19,6 @@ public class RandomDungeonGenerator : MonoBehaviour
         cornerTopRight = 12,
         cornerBottomLeft = 13,
         cornerBottomRight = 14
-
     }
 
     [SerializeField] private Grid grid;
@@ -32,11 +30,15 @@ public class RandomDungeonGenerator : MonoBehaviour
     [SerializeField]
     private Tile[] wallTile;
     [SerializeField]
+    private Tile[] doorTile;
+    [SerializeField]
     private Tilemap groundMap;
     [SerializeField]
     private Tilemap pitMap;
     [SerializeField]
     private Tilemap wallMap;
+    [SerializeField]
+    private Tilemap doorMap;
     [SerializeField]
     private GameObject player;
     [SerializeField]
@@ -48,7 +50,6 @@ public class RandomDungeonGenerator : MonoBehaviour
     [SerializeField]
     private int maxRoutes = 15;
 
-    [SerializeField] private Tile doorTile;
 
     [SerializeField] private GameObject doorPrefab;
 
@@ -61,7 +62,14 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     public List<Vector2> availablePosition = new List<Vector2>();
 
-    public void Generate() {
+    private System.Random random;
+    void Awake()
+    {
+        random = new System.Random(System.DateTime.Now.Second);
+    }
+
+    public void Generate()
+    {
         wallMap.ClearAllTiles();
         groundMap.ClearAllTiles();
         pitMap.ClearAllTiles();
@@ -81,22 +89,26 @@ public class RandomDungeonGenerator : MonoBehaviour
         SetDoor();
 
         var collider = wallMap.gameObject.GetComponent<TilemapCollider2D>();
-        if (collider == null) {
-            wallMap.gameObject.AddComponent<TilemapCollider2D>();    
+        if (collider == null)
+        {
+            wallMap.gameObject.AddComponent<TilemapCollider2D>();
         }
     }
 
-    public void Pass() {
+    public void Pass()
+    {
         Vector3Int pos = new Vector3Int(doorX, maxY, 0);
-        wallMap.SetTile(pos, null);
+        // wallMap.SetTile(pos, null);
+        doorMap.SetTile(pos, doorTile[1]);
         door.enable = true;
     }
 
-    private void SetDoor() {
+    private void SetDoor()
+    {
         Vector3Int pos = new Vector3Int(doorX, maxY, 0);
-        wallMap.SetTile(pos, doorTile);
+        doorMap.SetTile(pos, doorTile[0]);
         door.transform.position = grid.CellToWorld(pos);
-        //door.enable = false;
+        door.enable = false;
         groundMap.SetTile(pos, groundTile[0]);
     }
 
@@ -183,13 +195,13 @@ public class RandomDungeonGenerator : MonoBehaviour
                         //top tile
                         else
                         {
-                            if (Random.Range(1, 100) >= deviationRate)
+                            if (random.Next(0, 100) >= deviationRate)
                             {
                                 wallMap.SetTile(pos, wallTile[(int)wallIndex.top]);
                             }
                             else
                             {
-                                wallMap.SetTile(pos, wallTile[Random.Range((int)wallIndex.top + 1, (int)wallIndex.topRight - 1)]);
+                                wallMap.SetTile(pos, wallTile[random.Next((int)wallIndex.top + 1, (int)wallIndex.topRight - 1)]);
                             }
                         }
 
@@ -230,12 +242,12 @@ public class RandomDungeonGenerator : MonoBehaviour
                 previousPos = new Vector2Int(x, y);
 
                 //Go Straight
-                if (Random.Range(1, 100) <= deviationRate)
+                if (random.Next(0, 100) <= deviationRate)
                 {
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x + xOffset, previousPos.y + yOffset, roomSize);
-                        NewRoute(previousPos.x + xOffset, previousPos.y + yOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x + xOffset, previousPos.y + yOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -247,12 +259,12 @@ public class RandomDungeonGenerator : MonoBehaviour
                 }
 
                 //Go left
-                if (Random.Range(1, 100) <= deviationRate)
+                if (random.Next(0, 100) <= deviationRate)
                 {
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x - yOffset, previousPos.y + xOffset, roomSize);
-                        NewRoute(previousPos.x - yOffset, previousPos.y + xOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x - yOffset, previousPos.y + xOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -268,7 +280,7 @@ public class RandomDungeonGenerator : MonoBehaviour
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x + yOffset, previousPos.y - xOffset, roomSize);
-                        NewRoute(previousPos.x + yOffset, previousPos.y - xOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x + yOffset, previousPos.y - xOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -291,12 +303,14 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     private void GenerateSquare(int x, int y, int radius)
     {
-        if (x == 0 && y == -1) {
+        if (x == 0 && y == -1)
+        {
             --routeCount;
             return;
         }
 
-        if (y + radius + 1 > maxY) {
+        if (y + radius + 1 > maxY)
+        {
             maxY = y + radius + 1;
             doorX = x;
         }
@@ -307,13 +321,13 @@ public class RandomDungeonGenerator : MonoBehaviour
             {
                 Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
                 availablePosition.Add(grid.CellToWorld(tilePos) + grid.cellSize / 2);
-                if (Random.Range(1, 100) >= deviationRate)
+                if (random.Next(0, 100) >= deviationRate)
                 {
                     groundMap.SetTile(tilePos, groundTile[0]);
                 }
                 else
                 {
-                    groundMap.SetTile(tilePos, groundTile[Random.Range(1, groundTile.Length)]);
+                    groundMap.SetTile(tilePos, groundTile[random.Next(1, groundTile.Length)]);
                 }
             }
         }

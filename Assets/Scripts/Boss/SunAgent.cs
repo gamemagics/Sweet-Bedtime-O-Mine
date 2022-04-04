@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SunAgent : MonoBehaviour {
+public class SunAgent : MonoBehaviour
+{
     private Animator animator = null;
     private GameObject player = null;
     private static readonly float INTERVAL = 1.5f;
@@ -13,41 +14,51 @@ public class SunAgent : MonoBehaviour {
 
     private System.Random random = null;
 
-    void Awake() {
-        random = new System.Random((int)Time.time);
+    void Awake()
+    {
+        random = new System.Random(System.DateTime.Now.Second);
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update() {
-        if (timer < INTERVAL) {
+    void Update()
+    {
+        if (timer < INTERVAL)
+        {
             timer += Time.deltaTime;
         }
-        else {
+        else
+        {
             timer -= INTERVAL;
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-            if (info.IsName("Base Layer.Attack1")) {
-                for (int i = 0; i < 10; ++i) {
+            if (info.IsName("Base Layer.Attack1"))
+            {
+                for (int i = 0; i < 10; ++i)
+                {
                     AttackFireBall();
                 }
-                
+
             }
-            else {
-                for (int i = 0; i < 10; ++i) {
-                    AttackFlame();    
+            else
+            {
+                for (int i = 0; i < 10; ++i)
+                {
+                    AttackFlame();
                 }
             }
         }
     }
 
-    void AttackFireBall() {
+    void AttackFireBall()
+    {
         GameObject ball = GameObject.Instantiate<GameObject>(fireBallPrefab);
         ball.tag = "EnemyAttack";
         ball.name = "ball";
         ball.transform.position = new Vector3(random.Next(-3, 3), random.Next(-3, 3), transform.position.z);
     }
 
-    void AttackFlame() {
+    void AttackFlame()
+    {
         GameObject flame = GameObject.Instantiate<GameObject>(flamePrefab);
         flame.tag = "EnemyAttack";
         flame.name = "flame";

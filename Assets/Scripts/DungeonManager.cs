@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
-public class DungeonManager : MonoBehaviour {
+public class DungeonManager : MonoBehaviour
+{
     [SerializeField] private int[] layerRoomCount;
     [SerializeField] private GameObject[] bossPrefab;
 
@@ -29,82 +31,103 @@ public class DungeonManager : MonoBehaviour {
 
     private int remains = 3;
 
-    void Awake() {
+    void Awake()
+    {
         random = new System.Random(System.DateTime.Now.Second);
         instance = this;
     }
 
-    public void ReportDeath() {
+    public void ReportDeath()
+    {
         --remains;
     }
 
-    public static DungeonManager Instance {
-        get {
+    public static DungeonManager Instance
+    {
+        get
+        {
             return instance;
         }
     }
 
-    public void GoNextRoom() {
-        if (currentRoom != null) {
+    public void GoNextRoom()
+    {
+        if (currentRoom != null)
+        {
             DestroyImmediate(currentRoom);
             currentRoom = null;
         }
-        
-        if (isBoss) {
+
+        if (isBoss)
+        {
             ++layer;
             roomNunber = 0;
-            if (layer == layerRoomCount.Length) {
-                // TODO:
+            if (layer == layerRoomCount.Length)
+            {
+                EndUI.isHappy = true;
+                SceneManager.LoadScene(2);
+
             }
-            else {
+            else
+            {
                 currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
                 currentRoom.transform.position = Vector3.zero;
             }
         }
-        else if (roomNunber == layerRoomCount[layer]) {
+        else if (roomNunber == layerRoomCount[layer])
+        {
             GameObject bossRoom = GameObject.Instantiate<GameObject>(bossPrefab[layer]);
             bossRoom.transform.position = Vector3.zero;
             grid.gameObject.SetActive(false);
         }
-        else {
-            if (roomNunber == 0) {
+        else
+        {
+            if (roomNunber == 0)
+            {
                 grid.gameObject.SetActive(true);
             }
             ++roomNunber;
-            
+
             generator.Generate();
         }
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
-        //GenerateMonsters();
+        GenerateMonsters();
     }
 
-    void GenerateMonsters() {
+    void GenerateMonsters()
+    {
         var type = (Monstergenerator.MonsterType)random.Next(0, 5);
         type = Monstergenerator.MonsterType.CLOCK;
 
-        if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK) {
+        if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK)
+        {
             remains = 1;
             GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
             monster.transform.position = Vector3.zero;
             DigitalClockProxy proxy = monster.GetComponent<DigitalClockProxy>();
-            
+
             var color = (DigitalClockProxy.DigitalClockColor)random.Next(0, 3);
             Vector2[] pos = new Vector2[3];
             int[] prev = new int[3];
-            for (int i = 0; i < 3; ++i) {
+            for (int i = 0; i < 3; ++i)
+            {
                 int posIndex = random.Next(0, generator.availablePosition.Count);
                 bool repeat = false;
-                do {
+                do
+                {
                     repeat = false;
-                    for (int j = 0; j < i; ++j) {
-                        if (prev[j] == posIndex) {
+                    for (int j = 0; j < i; ++j)
+                    {
+                        if (prev[j] == posIndex)
+                        {
                             repeat = true;
+                            posIndex = random.Next(0, generator.availablePosition.Count);
                             break;
                         }
                     }
-                }while(repeat);
+                } while (repeat);
 
                 prev[i] = posIndex;
                 pos[i] = generator.availablePosition[posIndex];
@@ -112,42 +135,52 @@ public class DungeonManager : MonoBehaviour {
 
             proxy.InitByColor(color, pos);
         }
-        else {
+        else
+        {
             remains = 3;
             int[] prev = new int[remains];
-            
-            for (int i = 0; i < remains; ++i) {
+
+            for (int i = 0; i < remains; ++i)
+            {
                 GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
                 int posIndex = random.Next(0, generator.availablePosition.Count);
                 bool repeat = false;
-                do {
+                do
+                {
                     repeat = false;
-                    for (int j = 0; j < i; ++j) {
-                        if (prev[j] == posIndex) {
+                    for (int j = 0; j < i; ++j)
+                    {
+                        if (prev[j] == posIndex)
+                        {
                             repeat = true;
+                            posIndex = random.Next(0, generator.availablePosition.Count);
                             break;
                         }
                     }
-                }while(repeat);
+                } while (repeat);
 
                 prev[i] = posIndex;
                 Vector2 pos = generator.availablePosition[posIndex];
                 monster.transform.position = new Vector3(pos.x, pos.y, 0);
 
-                if (type == Monstergenerator.MonsterType.TRUMPET) {
+                if (type == Monstergenerator.MonsterType.TRUMPET)
+                {
                     TrumpetAgent agent = monster.GetComponent<TrumpetAgent>();
                     Vector2[] points = new Vector2[3];
-                    for (int j = 0; j < 3; ++j) {
+                    for (int j = 0; j < 3; ++j)
+                    {
                         posIndex = random.Next(0, generator.availablePosition.Count);
                         points[j] = generator.availablePosition[posIndex];
                     }
 
                     agent.cruisePoint = points;
                 }
-                else if (type == Monstergenerator.MonsterType.PENDULUM_CLOCK) {
+                else if (type == Monstergenerator.MonsterType.PENDULUM_CLOCK)
+                {
                     PendulumAgent agent = monster.GetComponent<PendulumAgent>();
                     Vector2[] points = new Vector2[5];
-                    for (int j = 0; j < 5; ++j) {
+                    for (int j = 0; j < 5; ++j)
+                    {
                         posIndex = random.Next(0, generator.availablePosition.Count);
                         points[j] = generator.availablePosition[posIndex];
                     }
@@ -158,13 +191,16 @@ public class DungeonManager : MonoBehaviour {
         }
     }
 
-    void Start() {
+    void Start()
+    {
         currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
         currentRoom.transform.position = Vector3.zero;
     }
 
-    void Update() {
-        if (remains == 0) {
+    void Update()
+    {
+        if (remains == 0)
+        {
             generator.Pass();
         }
     }

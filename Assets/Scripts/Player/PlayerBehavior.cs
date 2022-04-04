@@ -15,7 +15,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField]
     private float attackDelay = 0.3f;
 
-    public static readonly int MAX_HP = 10;
+    public static readonly int MAX_HP = 100;
     public int HP = MAX_HP;
     public int defendence = 0;
     public int damage = 2;
@@ -35,14 +35,15 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (HP <= 0) {
+        if (HP <= 0)
+        {
             EndUI.isHappy = false;
             SceneManager.LoadScene(2);
         }
 
         HPBar.transform.localPosition = new Vector3((float)HP / MAX_HP * INIT_X,
              HPBar.transform.localPosition.y, HPBar.transform.localPosition.z);
-        attackObj.damage = damage / 2;
+        attackObj.damage = Mathf.Max(damage / 2, 1);
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

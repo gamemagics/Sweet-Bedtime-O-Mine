@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ClockQueenAgent : MonoBehaviour {
-    private enum ClockQueenState {
-        IDLE,  ATTACK
+public class ClockQueenAgent : MonoBehaviour
+{
+    private enum ClockQueenState
+    {
+        IDLE, ATTACK
     }
 
     private NavMeshAgent agent;
@@ -23,8 +25,9 @@ public class ClockQueenAgent : MonoBehaviour {
 
     [SerializeField] private GameObject bulletPrefab = null;
 
-    void Awake() {
-        random = new System.Random((int)Time.time);
+    void Awake()
+    {
+        random = new System.Random(System.DateTime.Now.Second);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
@@ -32,15 +35,18 @@ public class ClockQueenAgent : MonoBehaviour {
         agent.updateUpAxis = false;
     }
 
-    void Start() {
+    void Start()
+    {
         int index = random.Next(0, cruisePoint.Length);
         previousPoint = index;
         Vector2 dest = cruisePoint[index];
         agent.SetDestination(new Vector3(dest.x, dest.y, transform.position.z));
     }
 
-    void Update() {
-        switch (state) {
+    void Update()
+    {
+        switch (state)
+        {
             case ClockQueenState.IDLE:
                 UpdateIdle();
                 break;
@@ -50,23 +56,28 @@ public class ClockQueenAgent : MonoBehaviour {
         }
     }
 
-    void UpdateIdle() {
-        Vector2 dis = agent.destination - transform.position; 
+    void UpdateIdle()
+    {
+        Vector2 dis = agent.destination - transform.position;
 
-        if (Vector2.Distance(agent.destination, transform.position) < 0.1f) {
+        if (Vector2.Distance(agent.destination, transform.position) < 0.1f)
+        {
             animator.SetBool("Attack", true);
             agent.SetDestination(transform.position);
             state = ClockQueenState.ATTACK;
         }
 
-        if (agent.velocity.x * transform.localScale.x > 0) {
+        if (agent.velocity.x * transform.localScale.x > 0)
+        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    void UpdateAttack() {
+    void UpdateAttack()
+    {
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack1")) {
+        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack1"))
+        {
             Vector2 p = new Vector2(random.Next(-1, 1), random.Next(-1, 1));
             p.Normalize();
             p *= 2 * (float)random.NextDouble();
@@ -76,9 +87,11 @@ public class ClockQueenAgent : MonoBehaviour {
 
             FinishAttack();
         }
-        else if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack2")) {
+        else if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack2"))
+        {
             float theta = 0.0f;
-            for (int i = 0; i < 18; ++i) {
+            for (int i = 0; i < 18; ++i)
+            {
                 Vector2 p = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
                 GameObject bullet = GameObject.Instantiate<GameObject>(bulletPrefab);
                 bullet.transform.position = new Vector3(transform.position.x + p.x, transform.position.y + p.y, transform.position.z);
@@ -87,7 +100,7 @@ public class ClockQueenAgent : MonoBehaviour {
 
                 bullet.name = "Bullet";
                 bullet.tag = "EnemyAttack";
-                
+
                 theta += 2 * Mathf.PI / 18.0f;
             }
 
@@ -95,16 +108,18 @@ public class ClockQueenAgent : MonoBehaviour {
         }
     }
 
-    void FinishAttack() {
+    void FinishAttack()
+    {
         int index = random.Next(0, cruisePoint.Length);
-        if (index == previousPoint) {
+        if (index == previousPoint)
+        {
             index = (index + 1) % cruisePoint.Length;
         }
 
         previousPoint = index;
         Vector2 dest = cruisePoint[index];
         agent.SetDestination(new Vector3(dest.x, dest.y, transform.position.z));
-        
+
         animator.SetBool("Attack", false);
         state = ClockQueenState.IDLE;
     }

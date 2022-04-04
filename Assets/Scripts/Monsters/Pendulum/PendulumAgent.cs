@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PendulumAgent : MonoBehaviour {
-    private enum PendulumState {
+public class PendulumAgent : MonoBehaviour
+{
+    private enum PendulumState
+    {
         IDLE, WALK, ATTACK
     }
 
@@ -26,8 +28,9 @@ public class PendulumAgent : MonoBehaviour {
 
     private Vector2 attackPoint = Vector2.zero;
 
-    void Awake() {
-        random = new System.Random((int)Time.time);
+    void Awake()
+    {
+        random = new System.Random(System.DateTime.Now.Second);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
@@ -36,8 +39,10 @@ public class PendulumAgent : MonoBehaviour {
         animator.SetFloat("Wait", WAIT_TIME);
     }
 
-    void Update() {
-        switch (state) {
+    void Update()
+    {
+        switch (state)
+        {
             case PendulumState.IDLE:
                 UpdateIdle();
                 break;
@@ -50,15 +55,19 @@ public class PendulumAgent : MonoBehaviour {
         }
     }
 
-    void UpdateIdle() {
+    void UpdateIdle()
+    {
         float wait = animator.GetFloat("Wait");
-        if (wait > 0) {
+        if (wait > 0)
+        {
             wait -= Time.deltaTime;
             animator.SetFloat("Wait", wait);
         }
-        else {
+        else
+        {
             int index = random.Next(0, cruisePoint.Length);
-            if (index == previousPoint) {
+            if (index == previousPoint)
+            {
                 index = (index + 1) % cruisePoint.Length;
             }
 
@@ -67,32 +76,38 @@ public class PendulumAgent : MonoBehaviour {
             agent.SetDestination(new Vector3(dest.x, dest.y, transform.position.z));
 
             animator.SetFloat("Wait", -1);
-            
+
             state = PendulumState.WALK;
         }
     }
 
-    void UpdateWalk() {
+    void UpdateWalk()
+    {
         Vector2 dis = agent.destination - transform.position;
-        if (Vector2.Distance(agent.destination, transform.position) < 0.1f) {
+        if (Vector2.Distance(agent.destination, transform.position) < 0.1f)
+        {
             animator.SetTrigger("Fire");
             agent.SetDestination(transform.position);
             state = PendulumState.ATTACK;
             attackPoint = new Vector2(random.Next(-1, 1), random.Next(-1, 1));
         }
 
-        if (agent.velocity.x * transform.localScale.x > 0) {
+        if (agent.velocity.x * transform.localScale.x > 0)
+        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    void UpdateAttack() {
-        if (attackPoint.x * transform.localScale.x > 0) {
+    void UpdateAttack()
+    {
+        if (attackPoint.x * transform.localScale.x > 0)
+        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
 
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack")) {
+        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack"))
+        {
             Vector2 p = attackPoint;
             p.Normalize();
             p *= ATTACK_RANGE * (float)random.NextDouble();

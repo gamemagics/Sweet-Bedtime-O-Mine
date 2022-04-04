@@ -2474,15 +2474,15 @@ Tilemap:
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 5
-    m_Data: {fileID: 11400000, guid: 2f5f59106d08342f88e842062a607f8d, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 15
-    m_Data: {fileID: 11400000, guid: c72b29c5911394e6ba862c61d2569f57, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 239
-    m_Data: {fileID: 11400000, guid: cdf81a574531d4a238fccfe9374ff3fc, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 5
-    m_Data: {fileID: 11400000, guid: 7f409020ad6614bd0b609c3edee2eaca, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 6
-    m_Data: {fileID: 11400000, guid: 9054bac98450a4abba4eda0b21dc513f, type: 2}
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 5
     m_Data: {fileID: -1102595236865405298, guid: 182a7a9a2227ef54db5a85878daad104,
@@ -2607,7 +2607,7 @@ GameObject:
   - component: {fileID: 4047523952732801371}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3340,27 +3340,27 @@ Tilemap:
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 27
-    m_Data: {fileID: 11400000, guid: dcebb9f033322419b8c2c09fdca188d0, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 3b42982abf6d44a4e89b72c7b7992dd9, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 10
-    m_Data: {fileID: 11400000, guid: 83e7e52aa783c4f2d9888d9301baa738, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: e0c68e050bdcb4353b47c72ffabc6407, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 2ee54accb727e4c609e2304c8831828c, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 7
-    m_Data: {fileID: 11400000, guid: c33451aaa5123477192ab84a12998856, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: d008b1738a51b40b7b7467669a8a1eed, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 10
-    m_Data: {fileID: 11400000, guid: 6575a9e17f8a145038c780f5dc40a9c7, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 2
-    m_Data: {fileID: 11400000, guid: d65b741698ee04b02b7a64b231e60bc0, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 7
-    m_Data: {fileID: 11400000, guid: 82db7681c1e6c4dffaa2e949de35de57, type: 2}
+    m_Data: {fileID: 0}
   - m_RefCount: 11
-    m_Data: {fileID: 11400000, guid: 5ae2dac3b861b4d4fbbf84836d25789c, type: 2}
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 27
     m_Data: {fileID: -121229131653702427, guid: 182a7a9a2227ef54db5a85878daad104,
@@ -3624,10 +3624,10 @@ Tilemap:
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: f153f6a2770844dec8b3352e90a4805e, type: 2}
+    m_Data: {fileID: 11400000, guid: 2bb138662b35b405285bc63dead54245, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
-    m_Data: {fileID: 1505327036469021194, guid: 182a7a9a2227ef54db5a85878daad104,
+    m_Data: {fileID: 7686784698913507942, guid: 182a7a9a2227ef54db5a85878daad104,
       type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1

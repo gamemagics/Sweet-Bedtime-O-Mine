@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class TrumpetAgent : MonoBehaviour {
-    private enum TrumpetState {
+public class TrumpetAgent : MonoBehaviour
+{
+    private enum TrumpetState
+    {
         IDLE, WALK, ATTACK
     }
 
@@ -23,8 +25,9 @@ public class TrumpetAgent : MonoBehaviour {
 
     private int previousPoint = -1;
 
-    void Awake() {
-        random = new System.Random((int)Time.time);
+    void Awake()
+    {
+        random = new System.Random(System.DateTime.Now.Second);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         trumpetAttack = GetComponent<TrumpetAttack>();
@@ -34,8 +37,10 @@ public class TrumpetAgent : MonoBehaviour {
         animator.SetFloat("Wait", WAIT_TIME);
     }
 
-    void Update() {
-        switch (state) {
+    void Update()
+    {
+        switch (state)
+        {
             case TrumpetState.IDLE:
                 UpdateIdle();
                 break;
@@ -48,19 +53,24 @@ public class TrumpetAgent : MonoBehaviour {
         }
     }
 
-    void UpdateIdle() {
+    void UpdateIdle()
+    {
         float wait = animator.GetFloat("Wait");
-        if (wait > 0 && player == null) {
+        if (wait > 0 && player == null)
+        {
             wait -= Time.deltaTime;
             animator.SetFloat("Wait", wait);
         }
-        else if (player != null) {
+        else if (player != null)
+        {
             animator.SetBool("FoundPlayer", true);
             state = TrumpetState.ATTACK;
         }
-        else {
+        else
+        {
             int index = random.Next(0, cruisePoint.Length);
-            if (index == previousPoint) {
+            if (index == previousPoint)
+            {
                 index = (index + 1) % cruisePoint.Length;
             }
 
@@ -70,35 +80,42 @@ public class TrumpetAgent : MonoBehaviour {
 
             animator.ResetTrigger("Stop");
             animator.SetFloat("Wait", -1);
-            
+
             state = TrumpetState.WALK;
         }
     }
 
-    void UpdateWalk() {
-        Vector2 dis = agent.destination - transform.position; 
+    void UpdateWalk()
+    {
+        Vector2 dis = agent.destination - transform.position;
 
-        if (Vector2.Distance(agent.destination, transform.position) < 0.1f || player != null) {
+        if (Vector2.Distance(agent.destination, transform.position) < 0.1f || player != null)
+        {
             animator.SetFloat("Wait", WAIT_TIME);
             animator.SetTrigger("Stop");
             agent.SetDestination(transform.position);
             state = TrumpetState.IDLE;
         }
 
-        if (agent.velocity.x * transform.localScale.x > 0) {
+        if (agent.velocity.x * transform.localScale.x > 0)
+        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    void UpdateAttack() {
-        if (player == null) {
+    void UpdateAttack()
+    {
+        if (player == null)
+        {
             animator.SetBool("FoundPlayer", false);
             animator.SetFloat("Wait", WAIT_TIME);
             state = TrumpetState.IDLE;
         }
-        else {
+        else
+        {
             Vector2 direction = player.transform.position - transform.position;
-            if (direction.x * transform.localScale.x > 0) {
+            if (direction.x * transform.localScale.x > 0)
+            {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             }
 
@@ -107,14 +124,18 @@ public class TrumpetAgent : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = collider.gameObject;
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = null;
         }
     }
