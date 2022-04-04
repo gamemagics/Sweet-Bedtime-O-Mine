@@ -42,6 +42,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+/Users/kami/UnityProjects/Sweet-Bedtime-O-Mine/.history
 
 # Unity3D generated meta files
 *.pidb.meta
