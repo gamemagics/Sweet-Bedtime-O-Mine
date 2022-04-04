@@ -14,15 +14,15 @@ public class ProjectileBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag.Contains("Enemy"))
         {
             other.gameObject.GetComponent<EnemyBehavior>().TakeDamage(damage);
-            Destroy(gameObject);
         }
+        if (other.gameObject.tag != "Player")
+            Destroy(gameObject);
     }
 }

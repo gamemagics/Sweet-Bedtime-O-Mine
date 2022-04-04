@@ -56,6 +56,30 @@ public class PlayerBehavior : MonoBehaviour
         ChangeAnimation();
     }
 
+    public Vector2 GetDirection()
+    {
+        switch (currentState)
+        {
+            case "Player_Walk_SideFace":
+            case "Player_Attack_Idle_SideFace":
+            case "Player_Attack_Walk_SideFace":
+            case "Player_Idle_SideFace":
+                return new Vector2(-transform.localScale.x, 0);
+            case "Player_Walk_Front":
+            case "Player_Idle_Front":
+            case "Player_Attack_Walk_Front":
+            case "Player_Attack_Idle_Front":
+                return new Vector2(0, -1);
+            case "Player_Walk_Back":
+            case "Player_Idle_Back":
+            case "Player_Attack_Walk_Back":
+            case "Player_Attack_Idle_Back":
+                return new Vector2(0, 1);
+            default:
+                return Vector2.one;
+        }
+    }
+
     private void ChangeAnimation()
     {
         if (rb.velocity.x != 0 && !isAttacking)
