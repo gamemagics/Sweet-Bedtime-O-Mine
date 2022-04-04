@@ -52,7 +52,6 @@ public class DigitalClockProxy : MonoBehaviour {
 
                     var receiver = clock.GetComponentInChildren<DigitalDamageReceiver>();
                     receiver.HP = MAX_HP;
-                    Debug.Log("cnm");
                 }
             }
         }

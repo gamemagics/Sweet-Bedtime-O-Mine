@@ -71,6 +71,12 @@ public class DigitalClockAgent : MonoBehaviour {
             var dmg = GetComponentInChildren<DigitalDamageReceiver>();
             dmg.damagable = true;
         }
+        else if (!info.IsName("Base Layer.Reset")) {
+            animator.SetTrigger("Restart");
+            state = DigitalClockState.RUN;
+            var dmg = GetComponentInChildren<DigitalDamageReceiver>();
+            dmg.damagable = true;
+        }
     }
 
     void UpdateTime() {
