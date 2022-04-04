@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -35,7 +36,8 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         if (HP <= 0) {
-            // TODO:
+            EndUI.isHappy = false;
+            SceneManager.LoadScene(2);
         }
 
         HPBar.transform.localPosition = new Vector3((float)HP / MAX_HP * INIT_X,
