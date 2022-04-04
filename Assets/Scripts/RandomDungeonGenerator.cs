@@ -48,8 +48,7 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     private int routeCount = 0;
 
-    private void Start()
-    {
+    public void Generate() {
         int x = 0;
         int y = 0;
         int routeLength = 0;

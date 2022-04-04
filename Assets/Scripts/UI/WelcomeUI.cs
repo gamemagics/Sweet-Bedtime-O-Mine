@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WelcomeUI : MonoBehaviour {
     [SerializeField] private SpriteRenderer render1 = null;
@@ -10,7 +11,7 @@ public class WelcomeUI : MonoBehaviour {
     private float timer = 0.0f;
 
     public void StartGame() {
-        Debug.Log(1);
+        SceneManager.LoadScene(1);
     }
 
     void Update() {
