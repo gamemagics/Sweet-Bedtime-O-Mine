@@ -12,7 +12,7 @@ public class ClockBullet : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.tag != "EnemySearch" && collider.tag != "EnemyDamage") {
+        if (!collider.tag.Contains("Enemy")) {
             // TODO:
             Destroy(gameObject);
         }

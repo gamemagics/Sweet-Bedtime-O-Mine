@@ -14,17 +14,11 @@ public class DigitalClockAgent : MonoBehaviour {
 
     private GameObject player = null;
 
-    public int index = 0;
-
-    public UnityEvent<int> OnShutDown;
-
     public string timeString = "00:00";
 
     private static readonly float SPEED = 0.5f;
 
     private static readonly float RUN_DISTANCE = 4f;
-
-    [SerializeField] private int HP = 1;
 
     [SerializeField] private Text text = null;
 
@@ -61,7 +55,8 @@ public class DigitalClockAgent : MonoBehaviour {
             transform.Translate(-direction * SPEED * Time.deltaTime);
         }
 
-        if (HP <= 0) {
+        var dmg = GetComponentInChildren<DigitalDamageReceiver>();
+        if (dmg.HP <= 0) {
             animator.SetBool("Shut", true);
             animator.ResetTrigger("Restart");
             state = DigitalClockState.SHUT_DOWN;
@@ -73,17 +68,13 @@ public class DigitalClockAgent : MonoBehaviour {
         if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Reset")) {
             animator.SetTrigger("Restart");
             state = DigitalClockState.RUN;
+            var dmg = GetComponentInChildren<DigitalDamageReceiver>();
+            dmg.damagable = true;
         }
     }
 
     void UpdateTime() {
         text.gameObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "") {
-            // TODO:
-        }
     }
 
     public void Reset() {

@@ -7,9 +7,10 @@ public class MonsterDamageReceiver : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.tag == "PlayerAttack") {
-            // TODO:
+            int dmg = collider.gameObject.GetComponent<ProjectileBehavior>().damage;
+            HP -= dmg;
             if (HP <= 0) {
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
         }
     }
