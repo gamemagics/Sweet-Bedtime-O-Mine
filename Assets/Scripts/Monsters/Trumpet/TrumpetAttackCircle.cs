@@ -9,6 +9,8 @@ public class TrumpetAttackCircle : MonoBehaviour {
     public float speed = 0.08f;
     public Vector2 direction = Vector2.zero;
 
+    private static readonly int DAMAGE = 3;
+
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
@@ -41,8 +43,12 @@ public class TrumpetAttackCircle : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.tag != "EnemySearch" && collider.tag != "EnemyDamage") {
-            // TODO:
+        if (!collider.tag.Contains("Enemy") && !collider.tag.Contains("Attack")) {
+            if (collider.tag == "Player") {
+                var pb = collider.gameObject.GetComponent<PlayerBehavior>();
+                pb.HP -= Mathf.Max(1, pb.defendence - DAMAGE);
+            }
+            
             Destroy(gameObject);
         }
     }
