@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DungeonManager : MonoBehaviour {
     [SerializeField] private int[] layerRoomCount;
@@ -9,6 +10,8 @@ public class DungeonManager : MonoBehaviour {
     [SerializeField] private RandomDungeonGenerator generator;
 
     [SerializeField] private GameObject bonusPrefab;
+
+    [SerializeField] private NavMeshSurface2d surface2D;
 
     private GameObject currentRoom = null;
 
@@ -63,6 +66,7 @@ public class DungeonManager : MonoBehaviour {
         }
 
         player.transform.position = Vector2.zero;
+        surface2D.BuildNavMesh();
     }
 
     void Start() {
