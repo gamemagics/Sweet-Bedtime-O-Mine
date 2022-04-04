@@ -1007,8 +1007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerRoomCount: 0300000005000000
   bossPrefab:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3093723933621095673, guid: 30d20bfe7c4619442a979ee386bdcd50, type: 3}
+  - {fileID: 3258206519661127946, guid: 45b24c19f71e2ec40b70a49d3ca411d1, type: 3}
   generator: {fileID: 1754744391}
   bonusPrefab: {fileID: 1895996721140256340, guid: 3cf7d25d7ae930544ad5393a4c6955d5,
     type: 3}
