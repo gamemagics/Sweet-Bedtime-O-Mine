@@ -367,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rb: {fileID: 257250279}
+  attackDelay: 0.3
 --- !u!4 &257250281
 Transform:
   m_ObjectHideFlags: 0
@@ -515,6 +516,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610572793}
   m_CullTransparentMesh: 0
+--- !u!1001 &624986475
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352228, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407058912807352229, guid: c1a7ced023aa91c42953cf9567dafdea,
+        type: 3}
+      propertyPath: m_Name
+      value: Monstergenerator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1a7ced023aa91c42953cf9567dafdea, type: 3}
 --- !u!1 &712640961
 GameObject:
   m_ObjectHideFlags: 0

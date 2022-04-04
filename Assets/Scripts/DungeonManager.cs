@@ -25,8 +25,17 @@ public class DungeonManager : MonoBehaviour {
 
     [SerializeField] private GameObject player;
 
+    private System.Random random;
+
+    private int remains = 3;
+
     void Awake() {
+        random = new System.Random(System.DateTime.Now.Second);
         instance = this;
+    }
+
+    public void ReportDeath() {
+        --remains;
     }
 
     public static DungeonManager Instance {
@@ -67,10 +76,54 @@ public class DungeonManager : MonoBehaviour {
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
+        GenerateMonsters();
+    }
+
+    void GenerateMonsters() {
+        var type = (Monstergenerator.MonsterType)random.Next(0, 5);
+        if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK) {
+            remains = 1;
+        }
+        else {
+            remains = 3;
+            for (int i = 0; i < remains; ++i) {
+                GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
+                int posIndex = random.Next(0, generator.availablePosition.Count);
+                Vector2 pos = generator.availablePosition[posIndex];
+                monster.transform.position = new Vector3(pos.x, pos.y, 0);
+
+                if (type == Monstergenerator.MonsterType.TRUMPET) {
+                    TrumpetAgent agent = monster.GetComponent<TrumpetAgent>();
+                    Vector2[] points = new Vector2[3];
+                    for (int j = 0; j < 3; ++j) {
+                        posIndex = random.Next(0, generator.availablePosition.Count);
+                        points[j] = generator.availablePosition[posIndex];
+                    }
+
+                    agent.cruisePoint = points;
+                }
+                else if (type == Monstergenerator.MonsterType.PENDULUM_CLOCK) {
+                    PendulumAgent agent = monster.GetComponent<PendulumAgent>();
+                    Vector2[] points = new Vector2[5];
+                    for (int j = 0; j < 5; ++j) {
+                        posIndex = random.Next(0, generator.availablePosition.Count);
+                        points[j] = generator.availablePosition[posIndex];
+                    }
+
+                    agent.cruisePoint = points;
+                }
+            }
+        }
     }
 
     void Start() {
         currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
         currentRoom.transform.position = Vector3.zero;
+    }
+
+    void Update() {
+        if (remains == 0) {
+            generator.Pass();
+        }
     }
 }

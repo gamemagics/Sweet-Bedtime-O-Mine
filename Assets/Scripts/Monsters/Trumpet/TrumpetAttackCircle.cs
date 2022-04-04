@@ -13,19 +13,19 @@ public class TrumpetAttackCircle : MonoBehaviour {
         lineRenderer = GetComponent<LineRenderer>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
 
-        Vector3[] positions = new Vector3[100];
-        Vector2[] points = new Vector2[200];
-        const float dt = Mathf.PI / 200.0f;
+        Vector3[] positions = new Vector3[20];
+        Vector2[] points = new Vector2[40];
+        const float dt = Mathf.PI / 40.0f;
         float theta = 0.0f;
         positions[0] = new Vector3(1.0f, 0.0f, 0);
         points[0] = new Vector2(1.0f, 0.0f);
-        for (int i = 1; i < 100; ++i) {
+        for (int i = 1; i < 20; ++i) {
             theta += dt;
             positions[i] = new Vector3(Mathf.Cos(theta), Mathf.Sin(theta), 0);
             points[i] = new Vector3(Mathf.Cos(theta) * (1 + lineRenderer.startWidth / 2), Mathf.Sin(theta) * (1 + lineRenderer.startWidth / 2), 0);
         }
         
-        for (int i = 100; i < 200; ++i) {
+        for (int i = 20; i < 40; ++i) {
             points[i] = new Vector3(Mathf.Cos(theta) * (1 - lineRenderer.startWidth / 2), Mathf.Sin(theta) * (1 - lineRenderer.startWidth / 2), 0);
             theta -= dt;
         }

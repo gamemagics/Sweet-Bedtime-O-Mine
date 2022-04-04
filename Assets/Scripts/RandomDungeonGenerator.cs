@@ -59,11 +59,14 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     [SerializeField] private Door door;
 
+    public List<Vector2> availablePosition = new List<Vector2>();
+
     public void Generate() {
         wallMap.ClearAllTiles();
         groundMap.ClearAllTiles();
         pitMap.ClearAllTiles();
         maxY = -114514;
+        availablePosition.Clear();
 
         int x = 0;
         int y = 0;
@@ -303,6 +306,7 @@ public class RandomDungeonGenerator : MonoBehaviour
             for (int tileY = y - radius; tileY <= y + radius; tileY++)
             {
                 Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
+                availablePosition.Add(grid.CellToWorld(tilePos));
                 if (Random.Range(1, 100) >= deviationRate)
                 {
                     groundMap.SetTile(tilePos, groundTile[0]);
