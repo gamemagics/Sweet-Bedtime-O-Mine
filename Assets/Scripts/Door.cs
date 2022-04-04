@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Door : MonoBehaviour {
     private bool flag = false;
+    public bool enable = true;
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+        if (enable && collider.gameObject.tag == "Player") {
             flag = true;
         }
     }
@@ -14,6 +15,7 @@ public class Door : MonoBehaviour {
     void Update() {
         if (flag) {
             DungeonManager.Instance.GoNextRoom();
+            flag = false;
         }
     }
 }

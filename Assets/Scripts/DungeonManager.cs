@@ -20,6 +20,8 @@ public class DungeonManager : MonoBehaviour {
 
     [SerializeField] private Grid grid;
 
+    [SerializeField] private GameObject player;
+
     void Awake() {
         instance = this;
     }
@@ -31,7 +33,6 @@ public class DungeonManager : MonoBehaviour {
     }
 
     public void GoNextRoom() {
-        grid.gameObject.SetActive(false);
         if (currentRoom != null) {
             DestroyImmediate(currentRoom);
             currentRoom = null;
@@ -39,6 +40,7 @@ public class DungeonManager : MonoBehaviour {
         
         if (isBoss) {
             ++layer;
+            roomNunber = 0;
             if (layer == layerRoomCount.Length) {
                 // TODO:
             }
@@ -49,12 +51,18 @@ public class DungeonManager : MonoBehaviour {
         }
         else if (roomNunber == layerRoomCount[layer]) {
             // BOSS
+            grid.gameObject.SetActive(false);
         }
         else {
+            if (roomNunber == 0) {
+                grid.gameObject.SetActive(true);
+            }
             ++roomNunber;
+            
             generator.Generate();
-            grid.gameObject.SetActive(true);
         }
+
+        player.transform.position = Vector2.zero;
     }
 
     void Start() {

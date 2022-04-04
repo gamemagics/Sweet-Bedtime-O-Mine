@@ -424,6 +424,7 @@ Transform:
   - {fileID: 1274763641}
   - {fileID: 712640962}
   - {fileID: 971079306}
+  - {fileID: 892851275}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -646,6 +647,93 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &892851274
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 321526358}
+    m_Modifications:
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847191842694112279, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+        type: 3}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bac5430fd39a7bb4fb18d8c976a8483d, type: 3}
+--- !u!4 &892851275 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3847191842694112272, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+    type: 3}
+  m_PrefabInstance: {fileID: 892851274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &892851276 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6676564055157539094, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+    type: 3}
+  m_PrefabInstance: {fileID: 892851274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd204c56162f71469ab7c02c7f8e1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924236907
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +786,7 @@ MonoBehaviour:
   bonusPrefab: {fileID: 1895996721140256340, guid: 3cf7d25d7ae930544ad5393a4c6955d5,
     type: 3}
   grid: {fileID: 321526357}
+  player: {fileID: 257250274}
 --- !u!1 &963128603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,6 +1549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14c8da620c244ee1bee8e57b5f3057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 321526357}
   groundTile:
   - {fileID: 11400000, guid: db2aaed24b5d549bb9030a7f2e2adca5, type: 2}
   - {fileID: 11400000, guid: 0a0e3dcbf3eb94fef9a209d832c1be5b, type: 2}
@@ -1491,6 +1581,10 @@ MonoBehaviour:
   roomRate: 15
   maxRouteLength: 5
   maxRoutes: 5
+  doorTile: {fileID: 11400000, guid: b59f5c54d095b80438d3fa3913b68e48, type: 2}
+  doorPrefab: {fileID: 3847191842694112279, guid: bac5430fd39a7bb4fb18d8c976a8483d,
+    type: 3}
+  door: {fileID: 892851276}
 --- !u!4 &1754744392
 Transform:
   m_ObjectHideFlags: 0

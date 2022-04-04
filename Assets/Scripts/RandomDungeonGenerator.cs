@@ -22,6 +22,9 @@ public class RandomDungeonGenerator : MonoBehaviour
         cornerBottomRight = 14
 
     }
+
+    [SerializeField] private Grid grid;
+
     [SerializeField]
     private Tile[] groundTile;
     [SerializeField]
@@ -45,10 +48,23 @@ public class RandomDungeonGenerator : MonoBehaviour
     [SerializeField]
     private int maxRoutes = 15;
 
+    [SerializeField] private Tile doorTile;
+
+    [SerializeField] private GameObject doorPrefab;
 
     private int routeCount = 0;
 
+    private int maxY = -114514;
+    private int doorX = 0;
+
+    [SerializeField] private Door door;
+
     public void Generate() {
+        wallMap.ClearAllTiles();
+        groundMap.ClearAllTiles();
+        pitMap.ClearAllTiles();
+        maxY = -114514;
+
         int x = 0;
         int y = 0;
         int routeLength = 0;
@@ -59,6 +75,23 @@ public class RandomDungeonGenerator : MonoBehaviour
         NewRoute(x, y, routeLength, previousPos);
 
         SetTiles();
+        SetDoor();
+
+        var collider = wallMap.gameObject.GetComponent<TilemapCollider2D>();
+        if (collider == null) {
+            wallMap.gameObject.AddComponent<TilemapCollider2D>();    
+        }
+    }
+
+    public void Pass() {
+        door.enable = true;
+    }
+
+    private void SetDoor() {
+        Vector3Int pos = new Vector3Int(doorX, maxY, 0);
+        wallMap.SetTile(pos, doorTile);
+        door.transform.position = grid.CellToWorld(pos);
+        door.enable = false;
     }
 
     private void SetTiles()
@@ -172,7 +205,6 @@ public class RandomDungeonGenerator : MonoBehaviour
                 }
             }
         }
-        wallMap.gameObject.AddComponent<TilemapCollider2D>();
     }
 
     private void NewRoute(int x, int y, int routeLength, Vector2Int previousPos)
@@ -253,6 +285,16 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     private void GenerateSquare(int x, int y, int radius)
     {
+        if (x == 0 && y == -1) {
+            --routeCount;
+            return;
+        }
+
+        if (y + radius + 1 > maxY) {
+            maxY = y + radius + 1;
+            doorX = x;
+        }
+
         for (int tileX = x - radius; tileX <= x + radius; tileX++)
         {
             for (int tileY = y - radius; tileY <= y + radius; tileY++)
