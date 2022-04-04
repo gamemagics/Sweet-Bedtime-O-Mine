@@ -54,7 +54,7 @@ public class TrumpetAttackCircle : MonoBehaviour
             if (collider.tag == "Player")
             {
                 var pb = collider.gameObject.GetComponent<PlayerBehavior>();
-                pb.HP -= Mathf.Max(1, DAMAGE - pb.defendence);
+                pb.TakeDamage(DAMAGE);
             }
 
             Destroy(gameObject);

@@ -98,7 +98,6 @@ public class RandomDungeonGenerator : MonoBehaviour
     public void Pass()
     {
         Vector3Int pos = new Vector3Int(doorX, maxY, 0);
-        // wallMap.SetTile(pos, null);
         doorMap.SetTile(pos, doorTile[1]);
         door.enable = true;
     }

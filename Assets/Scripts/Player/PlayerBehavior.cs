@@ -15,7 +15,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField]
     private float attackDelay = 0.3f;
 
-    public static readonly int MAX_HP = 100;
+    public static readonly int MAX_HP = 10;
     public int HP = MAX_HP;
     public int defendence = 0;
     public int damage = 2;
@@ -180,5 +180,16 @@ public class PlayerBehavior : MonoBehaviour
     private void AttackComplete()
     {
         isAttacking = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        HP -= Mathf.Max(1, damage - defendence);
+        Invoke("ResetColor", 0.1f);
+    }
+    private void ResetColor()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

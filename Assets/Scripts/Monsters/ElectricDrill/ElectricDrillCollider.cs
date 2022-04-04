@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricDrillCollider : MonoBehaviour {
+public class ElectricDrillCollider : MonoBehaviour
+{
     private static readonly int DAMAGE = 4;
 
-    void OnTriggerEnter2D(Collider2D collider) {
+    void OnTriggerEnter2D(Collider2D collider)
+    {
         transform.parent.gameObject.GetComponent<ElectricDrillAgent>().Stop();
 
-        if (!collider.tag.Contains("Enemy") && !collider.tag.Contains("Attack")) {
-            if (collider.tag == "Player") {
+        if (!collider.tag.Contains("Enemy") && !collider.tag.Contains("Attack"))
+        {
+            if (collider.tag == "Player")
+            {
                 var pb = collider.gameObject.GetComponent<PlayerBehavior>();
-                pb.HP -= Mathf.Max(1, pb.defendence - DAMAGE);
+                pb.TakeDamage(DAMAGE);
             }
         }
     }

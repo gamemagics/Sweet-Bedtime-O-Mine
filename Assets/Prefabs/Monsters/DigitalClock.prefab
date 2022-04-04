@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69795367748910162}
   - component: {fileID: 835364435787688848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DigitalClock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

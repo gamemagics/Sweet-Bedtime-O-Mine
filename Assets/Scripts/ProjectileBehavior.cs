@@ -8,7 +8,6 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Debug.Log("Projectile hit " + other.name);
         if (other.gameObject.tag == "EnemyDamage" || other.gameObject.tag == "Wall")
             Destroy(gameObject);
     }

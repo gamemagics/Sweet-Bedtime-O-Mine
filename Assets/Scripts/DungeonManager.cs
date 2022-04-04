@@ -29,6 +29,7 @@ public class DungeonManager : MonoBehaviour
 
     private System.Random random;
 
+    [SerializeField]
     private int remains = 3;
 
     void Awake()
@@ -60,13 +61,13 @@ public class DungeonManager : MonoBehaviour
 
         if (isBoss)
         {
+            isBoss = false;
             ++layer;
             roomNunber = 0;
             if (layer == layerRoomCount.Length)
             {
                 EndUI.isHappy = true;
                 SceneManager.LoadScene(2);
-
             }
             else
             {
@@ -76,12 +77,14 @@ public class DungeonManager : MonoBehaviour
         }
         else if (roomNunber == layerRoomCount[layer])
         {
+            isBoss = true;
             GameObject bossRoom = GameObject.Instantiate<GameObject>(bossPrefab[layer]);
             bossRoom.transform.position = Vector3.zero;
             grid.gameObject.SetActive(false);
         }
         else
         {
+            isBoss = false;
             if (roomNunber == 0)
             {
                 grid.gameObject.SetActive(true);

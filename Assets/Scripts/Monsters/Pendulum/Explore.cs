@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explore : MonoBehaviour {
+public class Explore : MonoBehaviour
+{
     private GameObject player = null;
 
     private Animator animator = null;
@@ -15,32 +16,41 @@ public class Explore : MonoBehaviour {
 
     private PlayerBehavior pb;
 
-    void Awake() {
+    void Awake()
+    {
         animator = transform.parent.gameObject.GetComponent<Animator>();
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = collider.gameObject;
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = null;
         }
     }
 
-    void Update() {
+    void Update()
+    {
         transform.position = Vector2.MoveTowards(transform.position, target, 100);
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Explore")) {
-            if (doDamage) {
-                pb.HP -= Mathf.Max(1, pb.defendence - DAMAGE);
+        if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Explore"))
+        {
+            if (doDamage)
+            {
+                pb.TakeDamage(DAMAGE);
             }
             DestroyImmediate(transform.parent.gameObject);
         }
-        else if (info.normalizedTime >= 0.5f && info.IsName("Base Layer.Explore") && player != null) {
+        else if (info.normalizedTime >= 0.5f && info.IsName("Base Layer.Explore") && player != null)
+        {
             doDamage = true;
             pb = player.GetComponent<PlayerBehavior>();
         }

@@ -27,7 +27,7 @@ public class ClockQueenAgent : MonoBehaviour
 
     void Awake()
     {
-        random = new System.Random(System.DateTime.Now.Second);
+        random = new System.Random((int)Time.time);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
@@ -84,6 +84,7 @@ public class ClockQueenAgent : MonoBehaviour
 
             GameObject child = Monstergenerator.Instance.GenerateMonster(Monstergenerator.MonsterType.CLOCK);
             child.transform.position = new Vector3(transform.position.x + p.x, transform.position.y + p.y, transform.position.z);
+            child.transform.parent = BossManager.Instance.transform;
 
             FinishAttack();
         }
