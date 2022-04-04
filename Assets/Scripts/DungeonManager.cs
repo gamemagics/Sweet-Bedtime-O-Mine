@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class DungeonManager : MonoBehaviour {
     [SerializeField] private int[] layerRoomCount;
@@ -54,7 +55,8 @@ public class DungeonManager : MonoBehaviour {
             ++layer;
             roomNunber = 0;
             if (layer == layerRoomCount.Length) {
-                // TODO:
+                EndUI.isHappy = true;
+                SceneManager.LoadScene(2);
             }
             else {
                 currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
@@ -77,7 +79,7 @@ public class DungeonManager : MonoBehaviour {
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
-        //GenerateMonsters();
+        GenerateMonsters();
     }
 
     void GenerateMonsters() {
@@ -128,7 +130,7 @@ public class DungeonManager : MonoBehaviour {
                             break;
                         }
                     }
-                }while(repeat);
+                } while(repeat);
 
                 prev[i] = posIndex;
                 Vector2 pos = generator.availablePosition[posIndex];
