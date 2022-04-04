@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public int moveSpeed = 5;
     public Rigidbody2D rb;
     Vector2 movement;
     private Animator animator;
@@ -13,6 +13,12 @@ public class PlayerBehavior : MonoBehaviour
     private bool isAttacking;
     [SerializeField]
     private float attackDelay = 0.3f;
+
+    public int HP = 10;
+    public int defendence = 0;
+    public int damage = 2;
+
+    [SerializeField] private Attack attackObj;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attackObj.damage = damage / 2;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    public float damage = 10f;
+    public int damage = 1;
     public float projectileForce = 10f;
     public float attackRate = 0.1f;
     private float nextAttack;
@@ -32,21 +32,25 @@ public class Attack : MonoBehaviour
         {
             GameObject projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x + GetPosition().x / 2, transform.position.y), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
+            projectile.GetComponent<ProjectileBehavior>().damage = damage;
         }
         else if (direction.x == -1 && direction.y == 0)
         {
             GameObject projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x - GetPosition().x / 2, transform.position.y), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
+            projectile.GetComponent<ProjectileBehavior>().damage = damage;
         }
         else if (direction.x == 0 && direction.y == 1)
         {
             GameObject projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x, transform.position.y + GetPosition().y / 2), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
+            projectile.GetComponent<ProjectileBehavior>().damage = damage;
         }
         else if (direction.x == 0 && direction.y == -1)
         {
             GameObject projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x, transform.position.y - GetPosition().y / 2), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
+            projectile.GetComponent<ProjectileBehavior>().damage = damage;
         }
     }
     private Vector2 GetPosition()

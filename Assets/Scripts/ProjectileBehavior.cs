@@ -8,7 +8,7 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Player")
+        if (!other.gameObject.tag.Contains("Player"))
             Destroy(gameObject);
     }
 }
