@@ -96,7 +96,7 @@ public class RandomDungeonGenerator : MonoBehaviour
         Vector3Int pos = new Vector3Int(doorX, maxY, 0);
         wallMap.SetTile(pos, doorTile);
         door.transform.position = grid.CellToWorld(pos);
-        door.enable = false;
+        //door.enable = false;
         groundMap.SetTile(pos, groundTile[0]);
     }
 
