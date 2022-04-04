@@ -31,10 +31,11 @@ public class DigitalClockAgent : MonoBehaviour {
     void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
-        text.text = timeString;
     }
 
     void Update() {
+        text.text = timeString;
+        
         switch (state) {
             case DigitalClockState.RUN:
                 UpdateRun();

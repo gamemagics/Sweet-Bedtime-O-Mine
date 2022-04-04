@@ -13,6 +13,14 @@ public class DigitalClockProxy : MonoBehaviour {
     private List<int> order = new List<int>();
 
     public void InitByColor(DigitalClockColor color, Vector2[] positions) {
-        // TODO:
+        for (int i = 0; i < positions.Length; ++i) {
+            GameObject clock = GameObject.Instantiate<GameObject>(digitalClockPrefabs[(int)color]);
+            clock.transform.position = positions[i];
+            clocks.Add(clock);
+
+            var agent = clock.GetComponent<DigitalClockAgent>();
+            agent.index = i;
+            agent.timeString = "0" + (i + 1).ToString() + ":00";
+        }
     }
 }

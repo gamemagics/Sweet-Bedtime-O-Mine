@@ -85,6 +85,31 @@ public class DungeonManager : MonoBehaviour {
 
         if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK) {
             remains = 1;
+            GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
+            monster.transform.position = Vector3.zero;
+            DigitalClockProxy proxy = monster.GetComponent<DigitalClockProxy>();
+            
+            var color = (DigitalClockProxy.DigitalClockColor)random.Next(0, 3);
+            Vector2[] pos = new Vector2[3];
+            int[] prev = new int[3];
+            for (int i = 0; i < 3; ++i) {
+                int posIndex = random.Next(0, generator.availablePosition.Count);
+                bool repeat = false;
+                do {
+                    repeat = false;
+                    for (int j = 0; j < i; ++j) {
+                        if (prev[j] == posIndex) {
+                            repeat = true;
+                            break;
+                        }
+                    }
+                }while(repeat);
+
+                prev[i] = posIndex;
+                pos[i] = generator.availablePosition[posIndex];
+            }
+
+            proxy.InitByColor(color, pos);
         }
         else {
             remains = 3;

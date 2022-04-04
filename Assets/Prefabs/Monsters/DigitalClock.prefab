@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7f518db16f7e24196331c566e0031c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  digitalClockPrefabs:
+  - {fileID: 69795367748910163, guid: 849ef4716852e034cb9360a133b14a62, type: 3}
+  - {fileID: 69795367748910163, guid: 3e72aada89564ff4aaa140d877e2b0ab, type: 3}
+  - {fileID: 69795367748910163, guid: 0b61ff2f4e12e6646a021cc1d8ad6db7, type: 3}
