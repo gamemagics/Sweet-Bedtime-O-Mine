@@ -280,8 +280,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 784247481893004345, guid: 8caa3f28c0cfc44b7bb628284fdddb0c,
     type: 3}
-  damage: 10
+  damage: 1
   projectileForce: 10
+  attackRate: 0.1
 --- !u!212 &257250278
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -368,6 +369,11 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 257250279}
   attackDelay: 0.3
+  HP: 10
+  defendence: 0
+  damage: 1
+  HPBar: {fileID: 1102777065}
+  attackObj: {fileID: 257250277}
 --- !u!4 &257250281
 Transform:
   m_ObjectHideFlags: 0

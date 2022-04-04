@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Beer
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 08129dd5ff6144ed7be13b8fe7bde329, type: 3}
-  text: 'Beer: Attack increased by 1'
-  prop: Attack
+  text: 'Beer: Damage increased by 1'
+  prop: Damage
   delta: 1

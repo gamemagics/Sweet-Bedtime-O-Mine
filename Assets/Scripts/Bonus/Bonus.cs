@@ -33,7 +33,20 @@ public class Bonus : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        // TODO:
+        var pb = player.GetComponent<PlayerBehavior>();
+        if (current.prop == "HP") {
+            pb.HP = Mathf.Min(pb.HP + current.delta, PlayerBehavior.MAX_HP);
+        }
+        else if (current.prop == "Speed") {
+            pb.moveSpeed += current.delta;
+        }
+        else if (current.prop == "Damage") {
+            pb.damage += current.delta;
+        }
+        else {
+            pb.defendence += current.delta;
+        }
+        
         TMPro.TMP_Text text = GameObject.FindGameObjectWithTag("Hint").GetComponent<TMPro.TMP_Text>();
         text.text = current.text;
         done = true;

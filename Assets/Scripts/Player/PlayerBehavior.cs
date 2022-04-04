@@ -14,11 +14,15 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField]
     private float attackDelay = 0.3f;
 
-    public int HP = 10;
+    public static readonly int MAX_HP = 10;
+    public int HP = MAX_HP;
     public int defendence = 0;
     public int damage = 2;
 
+    [SerializeField] private RectTransform HPBar;
+
     [SerializeField] private Attack attackObj;
+    private static readonly float INIT_X = 280;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +34,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HPBar.position = new Vector3((float)HP / MAX_HP * INIT_X, HPBar.position.y, HPBar.position.z);
         attackObj.damage = damage / 2;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
