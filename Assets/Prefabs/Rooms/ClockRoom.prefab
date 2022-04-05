@@ -5824,12 +5824,12 @@ PrefabInstance:
     - target: {fileID: 4404276512332974124, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
       propertyPath: HP
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4404276512332974124, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
       propertyPath: maxHP
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4456523618215908724, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}

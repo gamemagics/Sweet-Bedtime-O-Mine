@@ -167,7 +167,12 @@ PrefabInstance:
     - target: {fileID: 7159464121611116113, guid: 399e2f2cb48305747874d962e9719075,
         type: 3}
       propertyPath: HP
-      value: 30
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159464121611116113, guid: 399e2f2cb48305747874d962e9719075,
+        type: 3}
+      propertyPath: isBoss
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7159464121611116118, guid: 399e2f2cb48305747874d962e9719075,
         type: 3}
