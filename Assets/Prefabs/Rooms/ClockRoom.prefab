@@ -5839,7 +5839,47 @@ PrefabInstance:
     - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
         type: 3}
       propertyPath: cruisePoint.Array.size
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[0].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[1].x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[1].y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[2].x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[2].y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[3].x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584194687948441214, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: cruisePoint.Array.data[3].y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b64b1c9be0bc934db0cd8955a4e56da, type: 3}

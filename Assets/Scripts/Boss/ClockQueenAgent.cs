@@ -60,7 +60,7 @@ public class ClockQueenAgent : MonoBehaviour
     {
         Vector2 dis = agent.destination - transform.position;
 
-        if (Vector2.Distance(agent.destination, transform.position) < 0.1f)
+        if (Vector2.Distance(agent.destination, transform.position) < 0.01f)
         {
             animator.SetBool("Attack", true);
             agent.SetDestination(transform.position);
@@ -78,17 +78,19 @@ public class ClockQueenAgent : MonoBehaviour
         AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack1"))
         {
-            Vector2 p = new Vector2(random.Next(-1, 1), random.Next(-1, 1));
-            p.Normalize();
-            p *= 2 * (float)random.NextDouble();
+            for (int i = 0; i < 3; ++i) {
+                Vector2 p = new Vector2(random.Next(-1, 1), random.Next(-1, 1));
+                p.Normalize();
+                p *= 2.5f * (float)random.NextDouble();
 
-            GameObject child = Monstergenerator.Instance.GenerateMonster(Monstergenerator.MonsterType.CLOCK);
-            child.transform.position = new Vector3(transform.position.x + p.x, transform.position.y + p.y, transform.position.z);
-            child.transform.parent = BossManager.Instance.transform;
+                GameObject child = Monstergenerator.Instance.GenerateMonster(Monstergenerator.MonsterType.CLOCK);
+                child.transform.position = new Vector3(transform.position.x + p.x, transform.position.y + p.y, transform.position.z);
+                child.transform.parent = BossManager.Instance.transform;
+            }
 
             FinishAttack();
         }
-        else if (info.normalizedTime >= 1.0f && info.IsName("Base Layer.Attack2"))
+        else if (info.IsName("Base Layer.Attack2"))
         {
             float theta = 0.0f;
             for (int i = 0; i < 18; ++i)
