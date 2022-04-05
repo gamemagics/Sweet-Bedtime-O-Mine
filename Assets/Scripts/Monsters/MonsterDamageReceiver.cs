@@ -34,7 +34,7 @@ public class MonsterDamageReceiver : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         GetComponentInParent<SpriteRenderer>().color = Color.red;
-        AudioManager.instance.MonsterHurtAudio();
+        AudioManager.Instance.MonsterHurtAudio();
         HP -= dmg;
         Invoke("ResetColor", 0.1f);
         if (HP <= 0)

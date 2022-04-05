@@ -16,7 +16,7 @@ public class DigitalDamageReceiver : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider) {
         if (damagable && collider.tag == "PlayerAttack") {
-            AudioManager.instance.MonsterHurtAudio();
+            AudioManager.Instance.MonsterHurtAudio();
             int dmg = collider.gameObject.GetComponent<ProjectileBehavior>().damage;
             HP -= dmg;
             if (HP <= 0) {
