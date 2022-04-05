@@ -42,7 +42,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-/Users/kami/UnityProjects/Sweet-Bedtime-O-Mine/.history
+.history/
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -60,3 +60,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 .vscode/
+Game/
+Game.zip

@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
-    public float damage;
-    // Start is called before the first frame update
-    void Start()
-    {
+    public int damage;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.GetComponent<EnemyBehavior>().TakeDamage(damage);
+        if (other.gameObject.tag == "EnemyDamage" || other.gameObject.tag == "Wall")
             Destroy(gameObject);
-        }
     }
 }

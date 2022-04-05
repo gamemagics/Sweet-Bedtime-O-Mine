@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class RandomDungeonGenerator : MonoBehaviour
 {
-
     enum wallIndex
     {
         topLeft = 0,
@@ -20,8 +19,10 @@ public class RandomDungeonGenerator : MonoBehaviour
         cornerTopRight = 12,
         cornerBottomLeft = 13,
         cornerBottomRight = 14
-
     }
+
+    [SerializeField] private Grid grid;
+
     [SerializeField]
     private Tile[] groundTile;
     [SerializeField]
@@ -29,11 +30,15 @@ public class RandomDungeonGenerator : MonoBehaviour
     [SerializeField]
     private Tile[] wallTile;
     [SerializeField]
+    private Tile[] doorTile;
+    [SerializeField]
     private Tilemap groundMap;
     [SerializeField]
     private Tilemap pitMap;
     [SerializeField]
     private Tilemap wallMap;
+    [SerializeField]
+    private Tilemap doorMap;
     [SerializeField]
     private GameObject player;
     [SerializeField]
@@ -46,10 +51,32 @@ public class RandomDungeonGenerator : MonoBehaviour
     private int maxRoutes = 15;
 
 
+    [SerializeField] private GameObject doorPrefab;
+
     private int routeCount = 0;
 
-    private void Start()
+    private int maxY = -114514;
+    private int doorX = 0;
+
+    [SerializeField] private Door door;
+
+    public List<Vector2> availablePosition = new List<Vector2>();
+
+    private System.Random random;
+    void Awake()
     {
+        random = new System.Random(System.DateTime.Now.Second);
+    }
+
+    public void Generate()
+    {
+        wallMap.ClearAllTiles();
+        groundMap.ClearAllTiles();
+        pitMap.ClearAllTiles();
+        doorMap.ClearAllTiles();
+        maxY = -114514;
+        availablePosition.Clear();
+
         int x = 0;
         int y = 0;
         int routeLength = 0;
@@ -60,6 +87,29 @@ public class RandomDungeonGenerator : MonoBehaviour
         NewRoute(x, y, routeLength, previousPos);
 
         SetTiles();
+        SetDoor();
+
+        var collider = wallMap.gameObject.GetComponent<TilemapCollider2D>();
+        if (collider == null)
+        {
+            wallMap.gameObject.AddComponent<TilemapCollider2D>();
+        }
+    }
+
+    public void Pass()
+    {
+        Vector3Int pos = new Vector3Int(doorX, maxY, 0);
+        doorMap.SetTile(pos, doorTile[1]);
+        door.enable = true;
+    }
+
+    private void SetDoor()
+    {
+        Vector3Int pos = new Vector3Int(doorX, maxY, 0);
+        doorMap.SetTile(pos, doorTile[0]);
+        door.transform.position = grid.CellToWorld(pos);
+        door.enable = false;
+        groundMap.SetTile(pos, groundTile[0]);
     }
 
     private void SetTiles()
@@ -145,13 +195,13 @@ public class RandomDungeonGenerator : MonoBehaviour
                         //top tile
                         else
                         {
-                            if (Random.Range(1, 100) >= deviationRate)
+                            if (random.Next(0, 100) >= deviationRate)
                             {
                                 wallMap.SetTile(pos, wallTile[(int)wallIndex.top]);
                             }
                             else
                             {
-                                wallMap.SetTile(pos, wallTile[Random.Range((int)wallIndex.top + 1, (int)wallIndex.topRight - 1)]);
+                                wallMap.SetTile(pos, wallTile[random.Next((int)wallIndex.top + 1, (int)wallIndex.topRight - 1)]);
                             }
                         }
 
@@ -173,7 +223,6 @@ public class RandomDungeonGenerator : MonoBehaviour
                 }
             }
         }
-        wallMap.gameObject.AddComponent<TilemapCollider2D>();
     }
 
     private void NewRoute(int x, int y, int routeLength, Vector2Int previousPos)
@@ -193,12 +242,12 @@ public class RandomDungeonGenerator : MonoBehaviour
                 previousPos = new Vector2Int(x, y);
 
                 //Go Straight
-                if (Random.Range(1, 100) <= deviationRate)
+                if (random.Next(0, 100) <= deviationRate)
                 {
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x + xOffset, previousPos.y + yOffset, roomSize);
-                        NewRoute(previousPos.x + xOffset, previousPos.y + yOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x + xOffset, previousPos.y + yOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -210,12 +259,12 @@ public class RandomDungeonGenerator : MonoBehaviour
                 }
 
                 //Go left
-                if (Random.Range(1, 100) <= deviationRate)
+                if (random.Next(0, 100) <= deviationRate)
                 {
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x - yOffset, previousPos.y + xOffset, roomSize);
-                        NewRoute(previousPos.x - yOffset, previousPos.y + xOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x - yOffset, previousPos.y + xOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -231,7 +280,7 @@ public class RandomDungeonGenerator : MonoBehaviour
                     if (routeUsed)
                     {
                         GenerateSquare(previousPos.x + yOffset, previousPos.y - xOffset, roomSize);
-                        NewRoute(previousPos.x + yOffset, previousPos.y - xOffset, Random.Range(routeLength, maxRouteLength), previousPos);
+                        NewRoute(previousPos.x + yOffset, previousPos.y - xOffset, random.Next(routeLength, maxRouteLength), previousPos);
                     }
                     else
                     {
@@ -254,18 +303,31 @@ public class RandomDungeonGenerator : MonoBehaviour
 
     private void GenerateSquare(int x, int y, int radius)
     {
+        if (x == 0 && y == -1)
+        {
+            --routeCount;
+            return;
+        }
+
+        if (y + radius + 1 > maxY)
+        {
+            maxY = y + radius + 1;
+            doorX = x;
+        }
+
         for (int tileX = x - radius; tileX <= x + radius; tileX++)
         {
             for (int tileY = y - radius; tileY <= y + radius; tileY++)
             {
                 Vector3Int tilePos = new Vector3Int(tileX, tileY, 0);
-                if (Random.Range(1, 100) >= deviationRate)
+                availablePosition.Add(grid.CellToWorld(tilePos) + grid.cellSize / 2);
+                if (random.Next(0, 100) >= deviationRate)
                 {
                     groundMap.SetTile(tilePos, groundTile[0]);
                 }
                 else
                 {
-                    groundMap.SetTile(tilePos, groundTile[Random.Range(1, groundTile.Length)]);
+                    groundMap.SetTile(tilePos, groundTile[random.Next(1, groundTile.Length)]);
                 }
             }
         }
