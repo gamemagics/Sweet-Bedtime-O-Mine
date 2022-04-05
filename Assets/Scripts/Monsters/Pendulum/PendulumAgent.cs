@@ -19,7 +19,7 @@ public class PendulumAgent : MonoBehaviour
 
     private static readonly float WAIT_TIME = 3.0f;
 
-    private static readonly float ATTACK_RANGE = 1.5f;
+    private static readonly float ATTACK_RANGE = 3f;
 
     public Vector2[] cruisePoint;
     private int previousPoint = -1;

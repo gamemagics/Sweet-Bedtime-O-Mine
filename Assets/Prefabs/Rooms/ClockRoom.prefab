@@ -5881,6 +5881,16 @@ PrefabInstance:
       propertyPath: cruisePoint.Array.data[3].y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7654118838644600223, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7654118838644600223, guid: 5b64b1c9be0bc934db0cd8955a4e56da,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b64b1c9be0bc934db0cd8955a4e56da, type: 3}
 --- !u!4 &3704517023985340882 stripped
