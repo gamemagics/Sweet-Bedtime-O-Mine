@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d93baef75b6774ea9ce137b2076929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerRoomCount: 0300000005000000
+  layerRoomCount: 0600000005000000
   bossPrefab:
   - {fileID: 3093723933621095673, guid: 30d20bfe7c4619442a979ee386bdcd50, type: 3}
   - {fileID: 3258206519661127946, guid: 45b24c19f71e2ec40b70a49d3ca411d1, type: 3}

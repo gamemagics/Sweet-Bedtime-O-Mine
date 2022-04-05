@@ -109,7 +109,6 @@ public class DungeonManager : MonoBehaviour
     void GenerateMonsters()
     {
         var type = (Monstergenerator.MonsterType)random.Next(0, 5);
-        type = Monstergenerator.MonsterType.CLOCK;
 
         if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK)
         {
