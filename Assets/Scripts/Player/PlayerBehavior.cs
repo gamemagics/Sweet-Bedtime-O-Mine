@@ -47,10 +47,10 @@ public class PlayerBehavior : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            isAttackPressed = true;
-        }
+        // if (Input.GetKeyDown(KeyCode.K))
+        // {
+        //     isAttackPressed = true;
+        // }
     }
 
     void FixedUpdate()

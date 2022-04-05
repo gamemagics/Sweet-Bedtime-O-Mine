@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press WSAD to move, and press J/K to attack.
+  m_text: Press WSAD to move, and press J to attack.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d93547b15fbcba429a494e648ada255, type: 2}
   m_sharedMaterial: {fileID: 6164714139535791081, guid: 1d93547b15fbcba429a494e648ada255,
