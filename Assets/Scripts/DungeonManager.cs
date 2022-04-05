@@ -15,6 +15,11 @@ public class DungeonManager : MonoBehaviour
 
     [SerializeField] private NavMeshSurface2d surface2D;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip deep;
+    [SerializeField] private AudioClip normal;
+    [SerializeField] private AudioClip rem;
+
     private GameObject currentRoom = null;
 
     private static DungeonManager instance = null;
@@ -81,6 +86,8 @@ public class DungeonManager : MonoBehaviour
         }
         else if (roomNunber == layerRoomCount[layer])
         {
+            audioSource.clip = rem;
+            audioSource.Play();
             isBoss = true;
             GameObject bossRoom = GameObject.Instantiate<GameObject>(bossPrefab[layer]);
             bossRoom.transform.position = Vector3.zero;
@@ -92,6 +99,8 @@ public class DungeonManager : MonoBehaviour
             if (roomNunber == 0)
             {
                 grid.gameObject.SetActive(true);
+                audioSource.clip = normal;
+                audioSource.Play();
             }
             ++roomNunber;
 
@@ -204,6 +213,8 @@ public class DungeonManager : MonoBehaviour
     {
         currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
         currentRoom.transform.position = Vector3.zero;
+        audioSource.clip = deep;
+        audioSource.Play();
     }
 
     void Update()
