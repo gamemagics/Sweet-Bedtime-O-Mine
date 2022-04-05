@@ -1636,10 +1636,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1156900589}
-  shootAudio: {fileID: 0}
-  hurtAudio: {fileID: 0}
+  shootAudio: {fileID: 8300000, guid: 1cc4bdbd71c63458b8ae8a9957874286, type: 3}
+  hurtAudio: {fileID: 8300000, guid: d8ebb01dfda9e410faed3281919a64ae, type: 3}
   attackAudio: {fileID: 0}
-  collectAudio: {fileID: 0}
+  collectAudio: {fileID: 8300000, guid: 4f9d01e7ab7f641cfbba9af946de1043, type: 3}
   monsterHurtAudio: {fileID: 8300000, guid: d8ebb01dfda9e410faed3281919a64ae, type: 3}
 --- !u!4 &1156900587
 Transform:

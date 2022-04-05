@@ -66,7 +66,8 @@ public class DungeonManager : MonoBehaviour
             isBoss = false;
             ++layer;
             roomNunber = 0;
-            if (layer == layerRoomCount.Length)
+            //if (layer == layerRoomCount.Length)
+            if (layer == 1)
             {
                 EndUI.isHappy = true;
                 SceneManager.LoadScene(2);
@@ -99,7 +100,7 @@ public class DungeonManager : MonoBehaviour
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
-        
+
         if (generateMonster) {
             GenerateMonsters();
         }
