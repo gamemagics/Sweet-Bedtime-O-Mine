@@ -73,6 +73,7 @@ public class RandomDungeonGenerator : MonoBehaviour
         wallMap.ClearAllTiles();
         groundMap.ClearAllTiles();
         pitMap.ClearAllTiles();
+        doorMap.ClearAllTiles();
         maxY = -114514;
         availablePosition.Clear();
 

@@ -17,9 +17,10 @@ public class BossManager : MonoBehaviour {
     }
 
     public void Clear() {
-        door.enable = true;
-        for (int i = 0; i < transform.childCount; ++i) {
-            Destroy(transform.GetChild(i));
-        }
+        // door.enable = true;
+        // for (int i = 0; i < transform.childCount; ++i) {
+        //     Destroy(transform.GetChild(i));
+        // }
+        DungeonManager.Instance.GoNextRoom();
     }
 }
