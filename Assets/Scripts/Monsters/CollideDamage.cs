@@ -11,7 +11,7 @@ public class CollideDamage : MonoBehaviour
         if (collider.tag == "Player")
         {
             var pb = collider.gameObject.GetComponent<PlayerBehavior>();
-            pb.TakeDamage(DAMAGE);
+            pb.TakeDamage(DAMAGE, GetComponentInParent<Transform>().position);
         }
     }
 }

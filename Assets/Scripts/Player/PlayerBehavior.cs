@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System.Runtime.CompilerServices;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -24,6 +26,9 @@ public class PlayerBehavior : MonoBehaviour
 
     [SerializeField] private Attack attackObj;
     private static readonly float INIT_X = 280f;
+    private bool isInvincible = false;
+    [SerializeField] private float hurtForce = 0.5f;
+    [SerializeField] private Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -184,12 +189,43 @@ public class PlayerBehavior : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        DoTakeDamage(damage);
+    }
+    public void TakeDamage(int damage, Vector3 position)
+    {
+        DoTakeDamage(damage);
+
+        Vector2 direction = transform.position - position;
+        Vector2 pos = transform.position;
+
+        // rb.velocity = rb.velocity + direction * hurtForce;
+        transform.DOMove(rb.position + direction * hurtForce, 0.1f);
+        // (pos + direction * hurtForce);
+    }
+    public void DoTakeDamage(int damage)
+    {
+        if (isInvincible) return;
+        isInvincible = true;
+        Blink();
+
+        cam.transform.DOShakePosition(0.2f, 0.1f, 20, 90, false, true);
         HP -= Mathf.Max(1, damage - defendence);
-        Invoke("ResetColor", 0.1f);
+        Invoke("ResetInvincible", 1f);
     }
     private void ResetColor()
     {
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+    private void ResetInvincible()
+    {
+        isInvincible = false;
+    }
+    private void Blink()
+    {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        Sequence seq = DOTween.Sequence();
+        seq.Append(sprite.DOColor(new Color32(0, 0, 0, 0), 0.1f));
+        seq.Append(sprite.DOColor(Color.white, 0.1f));
+        seq.SetLoops(5);
     }
 }
