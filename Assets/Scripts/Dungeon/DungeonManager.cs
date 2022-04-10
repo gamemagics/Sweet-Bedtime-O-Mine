@@ -27,7 +27,7 @@ public class DungeonManager : MonoBehaviour
     private static DungeonManager instance = null;
 
     private bool isBoss = false;
-    private int roomNunber = 0;
+    private int roomNumber = 0;
     private int layer = 0;
 
     [SerializeField] private Grid grid;
@@ -38,6 +38,9 @@ public class DungeonManager : MonoBehaviour
 
     [SerializeField]
     private int monstersCount = 3;
+    bool isDigitalClock = false;
+    bool hasDigitalClock = false;
+
 
     void Awake()
     {
@@ -60,6 +63,14 @@ public class DungeonManager : MonoBehaviour
 
     public void GoNextRoom()
     {
+        if (random.Next(0, 100) < 20)
+        {
+            generator.Clear();
+            GenerateBonus();
+            player.transform.position.Set(0, 0, 0);
+            Debug.Log("player.transform.position: " + player.transform.position);
+            return;
+        }
         int groundTilesCount = 0;
         if (currentRoom != null)
         {
@@ -73,7 +84,7 @@ public class DungeonManager : MonoBehaviour
         {
             isBoss = false;
             ++layer;
-            roomNunber = 0;
+            roomNumber = 0;
             //if (layer == layerRoomCount.Length)
             if (layer == 1)
             {
@@ -87,7 +98,7 @@ public class DungeonManager : MonoBehaviour
                 generateMonster = false;
             }
         }
-        else if (roomNunber == layerRoomCount[layer])
+        else if (roomNumber == layerRoomCount[layer])
         {
             audioSource.clip = rem;
             audioSource.Play();
@@ -99,13 +110,13 @@ public class DungeonManager : MonoBehaviour
         else
         {
             isBoss = false;
-            if (roomNunber == 0)
+            if (roomNumber == 0)
             {
                 grid.gameObject.SetActive(true);
                 audioSource.clip = normal;
                 audioSource.Play();
             }
-            ++roomNunber;
+            ++roomNumber;
 
             groundTilesCount = generator.Generate();
 
@@ -125,7 +136,6 @@ public class DungeonManager : MonoBehaviour
         monstersCount = (int)(groundTilesCount * 0.05f);
         int monsterTypesCount = random.Next(2, 3);
         Monstergenerator.MonsterType[] monsterTypes = new Monstergenerator.MonsterType[monsterTypesCount];
-        bool isDigitalClock = false;
         for (int i = 0; i < monsterTypesCount; i++)
         {
             if (!isDigitalClock)
@@ -142,7 +152,7 @@ public class DungeonManager : MonoBehaviour
                 break;
             }
         }
-        if (isDigitalClock)
+        if (isDigitalClock && !hasDigitalClock)
         {
             monstersCount = 1;
             GameObject monster = Monstergenerator.Instance.GenerateMonster(Monstergenerator.MonsterType.DIGITAL_CLOCK);
@@ -174,6 +184,7 @@ public class DungeonManager : MonoBehaviour
                 pos[i] = generator.availablePosition[posIndex];
             }
             proxy.InitByColor(color, pos);
+            hasDigitalClock = true;
         }
         else
         {
@@ -233,10 +244,7 @@ public class DungeonManager : MonoBehaviour
 
     void Start()
     {
-        currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
-        currentRoom.transform.position = Vector3.zero;
-        audioSource.clip = deep;
-        audioSource.Play();
+        GenerateBonus();
     }
 
     void Update()
@@ -249,5 +257,13 @@ public class DungeonManager : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+    }
+
+    private void GenerateBonus()
+    {
+        currentRoom = GameObject.Instantiate<GameObject>(bonusPrefab);
+        currentRoom.transform.position = Vector3.zero;
+        audioSource.clip = deep;
+        audioSource.Play();
     }
 }

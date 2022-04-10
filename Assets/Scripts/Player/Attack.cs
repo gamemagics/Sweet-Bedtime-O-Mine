@@ -38,7 +38,11 @@ public class Attack : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayers);
             foreach (Collider2D enemy in enemiesToDamage)
             {
-                enemy.GetComponentInChildren<MonsterDamageReceiver>().TakeDamage(damage);
+                var receiver = enemy.GetComponentInChildren<MonsterDamageReceiver>();
+                if (receiver != null)
+                {
+                    receiver.TakeDamage(damage);
+                }
             }
         }
     }

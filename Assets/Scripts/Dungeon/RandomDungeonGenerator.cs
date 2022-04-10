@@ -68,20 +68,26 @@ public class RandomDungeonGenerator : MonoBehaviour
         random = new System.Random(System.DateTime.Now.Second);
     }
 
-    public int Generate()
+    public void Clear()
     {
-        routeCount = 0;
         wallMap.ClearAllTiles();
         groundMap.ClearAllTiles();
         pitMap.ClearAllTiles();
         doorMap.ClearAllTiles();
-        maxY = -114514;
         availablePosition.Clear();
+    }
+    public int Generate()
+    {
+        routeCount = 0;
+        Clear();
+        maxY = -114514;
 
         int x = 0;
         int y = 0;
         int routeLength = 0;
         GenerateSquare(x, y, 1);
+        doorMap.SetTile(new Vector3Int(0, -1, 0), doorTile[2]);
+        doorMap.gameObject.AddComponent<TilemapCollider2D>();
         Vector2Int previousPos = new Vector2Int(x, y);
         y += 3;
         GenerateSquare(x, y, 1);

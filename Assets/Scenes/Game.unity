@@ -890,22 +890,22 @@ PrefabInstance:
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.039423
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8752711
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.802671
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
@@ -920,7 +920,7 @@ PrefabInstance:
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
@@ -940,11 +940,6 @@ PrefabInstance:
     - target: {fileID: 4477799071556548366, guid: ed49e616b7ca08b478d757a3689909a4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4477799071556548367, guid: ed49e616b7ca08b478d757a3689909a4,
-        type: 3}
-      propertyPath: m_OverrideByGrid
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1061,7 +1056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924236907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34655833, y: -0.21440333, z: -30.489258}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1754744392}
@@ -1080,7 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d93baef75b6774ea9ce137b2076929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerRoomCount: 0400000005000000
+  layerRoomCount: 0500000005000000
   bossPrefab:
   - {fileID: 3093723933621095673, guid: 30d20bfe7c4619442a979ee386bdcd50, type: 3}
   - {fileID: 3258206519661127946, guid: 45b24c19f71e2ec40b70a49d3ca411d1, type: 3}
@@ -2101,6 +2096,7 @@ GameObject:
   - component: {fileID: 1526523471}
   - component: {fileID: 1526523473}
   - component: {fileID: 1526523472}
+  - component: {fileID: 1526523474}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -2207,6 +2203,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1526523474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526523470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1634859074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,8 +2459,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754744390}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34655833, y: 0.21440333, z: 30.489258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924236908}
