@@ -44,6 +44,7 @@ public class DungeonManager : MonoBehaviour
 
     void Awake()
     {
+        surface2D.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
         random = new System.Random(System.DateTime.Now.Second);
         instance = this;
     }
