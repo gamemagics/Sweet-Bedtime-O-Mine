@@ -37,7 +37,7 @@ public class DungeonManager : MonoBehaviour
     private System.Random random;
 
     [SerializeField]
-    private int remains = 3;
+    private int monstersCount = 3;
 
     void Awake()
     {
@@ -47,7 +47,7 @@ public class DungeonManager : MonoBehaviour
 
     public void ReportDeath()
     {
-        --remains;
+        --monstersCount;
     }
 
     public static DungeonManager Instance
@@ -122,12 +122,30 @@ public class DungeonManager : MonoBehaviour
 
     void GenerateMonsters(int groundTilesCount)
     {
-        var type = (Monstergenerator.MonsterType)random.Next(0, 5);
-
-        if (type == Monstergenerator.MonsterType.DIGITAL_CLOCK)
+        monstersCount = (int)(groundTilesCount * 0.05f);
+        int monsterTypesCount = random.Next(2, 3);
+        Monstergenerator.MonsterType[] monsterTypes = new Monstergenerator.MonsterType[monsterTypesCount];
+        bool isDigitalClock = false;
+        for (int i = 0; i < monsterTypesCount; i++)
         {
-            remains = 1;
-            GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
+            if (!isDigitalClock)
+            {
+                monsterTypes[i] = (Monstergenerator.MonsterType)random.Next(0, 5);
+            }
+            else
+            {
+                monsterTypes[i] = (Monstergenerator.MonsterType)random.Next(0, 4);
+            }
+            if (monsterTypes[i] == Monstergenerator.MonsterType.DIGITAL_CLOCK)
+            {
+                isDigitalClock = true;
+                break;
+            }
+        }
+        if (isDigitalClock)
+        {
+            monstersCount = 1;
+            GameObject monster = Monstergenerator.Instance.GenerateMonster(Monstergenerator.MonsterType.DIGITAL_CLOCK);
             monster.transform.position = Vector3.zero;
             DigitalClockProxy proxy = monster.GetComponent<DigitalClockProxy>();
 
@@ -155,17 +173,16 @@ public class DungeonManager : MonoBehaviour
                 prev[i] = posIndex;
                 pos[i] = generator.availablePosition[posIndex];
             }
-
             proxy.InitByColor(color, pos);
         }
         else
         {
-            remains = 3;
-            int[] prev = new int[remains];
+            int[] prev = new int[monstersCount];
 
-            for (int i = 0; i < remains; ++i)
+            for (int i = 0; i < monstersCount; ++i)
             {
-                GameObject monster = Monstergenerator.Instance.GenerateMonster(type);
+                Monstergenerator.MonsterType monsterType = monsterTypes[random.Next(0, monsterTypesCount)];
+                GameObject monster = Monstergenerator.Instance.GenerateMonster(monsterType);
                 int posIndex = random.Next(0, generator.availablePosition.Count);
                 bool repeat = false;
                 do
@@ -186,7 +203,7 @@ public class DungeonManager : MonoBehaviour
                 Vector2 pos = generator.availablePosition[posIndex];
                 monster.transform.position = new Vector3(pos.x, pos.y, 0);
 
-                if (type == Monstergenerator.MonsterType.TRUMPET)
+                if (monsterType == Monstergenerator.MonsterType.TRUMPET)
                 {
                     TrumpetAgent agent = monster.GetComponent<TrumpetAgent>();
                     Vector2[] points = new Vector2[3];
@@ -198,7 +215,7 @@ public class DungeonManager : MonoBehaviour
 
                     agent.cruisePoint = points;
                 }
-                else if (type == Monstergenerator.MonsterType.PENDULUM_CLOCK)
+                else if (monsterType == Monstergenerator.MonsterType.PENDULUM_CLOCK)
                 {
                     PendulumAgent agent = monster.GetComponent<PendulumAgent>();
                     Vector2[] points = new Vector2[5];
@@ -224,9 +241,13 @@ public class DungeonManager : MonoBehaviour
 
     void Update()
     {
-        if (remains == 0)
+        if (monstersCount == 0)
         {
             generator.Pass();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }

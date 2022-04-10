@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monstergenerator : MonoBehaviour {
     public enum MonsterType {
-        CLOCK = 0, DIGITAL_CLOCK = 1, TRUMPET = 2, ELECTRIC_DRILL = 3, PENDULUM_CLOCK = 4
+        CLOCK = 0, TRUMPET = 1, ELECTRIC_DRILL = 2, PENDULUM_CLOCK = 3,DIGITAL_CLOCK = 4
     }
 
     [SerializeField]

@@ -1094,7 +1094,7 @@ MonoBehaviour:
   rem: {fileID: 8300000, guid: 6bb2524a3e9f3444fafae8cae259ec79, type: 3}
   grid: {fileID: 321526357}
   player: {fileID: 257250274}
-  remains: 6
+  monstersCount: 3
 --- !u!1 &963128603
 GameObject:
   m_ObjectHideFlags: 0

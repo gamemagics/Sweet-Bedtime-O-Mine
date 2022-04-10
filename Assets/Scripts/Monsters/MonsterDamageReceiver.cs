@@ -19,7 +19,7 @@ public class MonsterDamageReceiver : MonoBehaviour
         {
             var animator = transform.parent.gameObject.GetComponent<Animator>();
             animator.SetFloat("Process", (float)HP / maxHP);
-            Debug.Log("Process:" + (float)HP / maxHP);
+            // Debug.Log("Process:" + (float)HP / maxHP);
         }
     }
     void OnTriggerEnter2D(Collider2D collider)

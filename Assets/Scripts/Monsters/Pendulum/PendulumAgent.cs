@@ -21,7 +21,7 @@ public class PendulumAgent : MonoBehaviour
 
     private static readonly float ATTACK_RANGE = 3f;
 
-    public Vector2[] cruisePoint;
+    public Vector2[] cruisePoint = new Vector2[5];
     private int previousPoint = -1;
 
     [SerializeField] private GameObject bombPrefab = null;

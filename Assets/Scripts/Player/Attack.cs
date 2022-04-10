@@ -9,7 +9,7 @@ public class Attack : MonoBehaviour
     public GameObject attackEffectPrefab;
     public int damage = 1;
     public float projectileForce = 10f;
-    public float shootRate = 0.1f;
+    public float shootRate = 0.3f;
     private float nextShoot;
     public float attackRate = 0.5f;
     private float nextAttack;
