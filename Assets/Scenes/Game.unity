@@ -2434,8 +2434,8 @@ MonoBehaviour:
   player: {fileID: 257250274}
   deviationRate: 50
   roomRate: 15
-  maxRouteLength: 5
-  maxRoutes: 5
+  maxRouteLength: 3
+  maxRoutes: 3
   doorPrefab: {fileID: 3847191842694112279, guid: bac5430fd39a7bb4fb18d8c976a8483d,
     type: 3}
   door: {fileID: 892851276}

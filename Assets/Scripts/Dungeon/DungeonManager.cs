@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Threading;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -58,6 +60,7 @@ public class DungeonManager : MonoBehaviour
 
     public void GoNextRoom()
     {
+        int groundTilesCount = 0;
         if (currentRoom != null)
         {
             DestroyImmediate(currentRoom);
@@ -104,18 +107,20 @@ public class DungeonManager : MonoBehaviour
             }
             ++roomNunber;
 
-            generator.Generate();
+            groundTilesCount = generator.Generate();
+
         }
 
         player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
 
-        if (generateMonster) {
-            GenerateMonsters();
+        if (generateMonster)
+        {
+            GenerateMonsters(groundTilesCount);
         }
     }
 
-    void GenerateMonsters()
+    void GenerateMonsters(int groundTilesCount)
     {
         var type = (Monstergenerator.MonsterType)random.Next(0, 5);
 

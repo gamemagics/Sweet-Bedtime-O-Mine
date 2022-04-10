@@ -48,7 +48,7 @@ public class RandomDungeonGenerator : MonoBehaviour
     [SerializeField]
     private int maxRouteLength;
     [SerializeField]
-    private int maxRoutes = 15;
+    private int maxRoutes;
 
 
     [SerializeField] private GameObject doorPrefab;
@@ -68,8 +68,9 @@ public class RandomDungeonGenerator : MonoBehaviour
         random = new System.Random(System.DateTime.Now.Second);
     }
 
-    public void Generate()
+    public int Generate()
     {
+        routeCount = 0;
         wallMap.ClearAllTiles();
         groundMap.ClearAllTiles();
         pitMap.ClearAllTiles();
@@ -86,7 +87,9 @@ public class RandomDungeonGenerator : MonoBehaviour
         GenerateSquare(x, y, 1);
         NewRoute(x, y, routeLength, previousPos);
 
-        SetTiles();
+        int groundTilesCount = SetTiles();
+        Debug.Log("groundTilesCount = " + groundTilesCount);
+
         SetDoor();
 
         var collider = wallMap.gameObject.GetComponent<TilemapCollider2D>();
@@ -94,6 +97,8 @@ public class RandomDungeonGenerator : MonoBehaviour
         {
             wallMap.gameObject.AddComponent<TilemapCollider2D>();
         }
+
+        return groundTilesCount;
     }
 
     public void Pass()
@@ -112,8 +117,9 @@ public class RandomDungeonGenerator : MonoBehaviour
         groundMap.SetTile(pos, groundTile[0]);
     }
 
-    private void SetTiles()
+    private int SetTiles()
     {
+        int groundTilesCount = 0;
         BoundsInt bounds = groundMap.cellBounds;
         for (int xMap = bounds.xMin - 5; xMap <= bounds.xMax + 5; xMap++)
         {
@@ -221,8 +227,13 @@ public class RandomDungeonGenerator : MonoBehaviour
                         pitMap.SetTile(pos, pitTile[0]);
                     }
                 }
+                else
+                {
+                    groundTilesCount++;
+                }
             }
         }
+        return groundTilesCount;
     }
 
     private void NewRoute(int x, int y, int routeLength, Vector2Int previousPos)
@@ -237,8 +248,8 @@ public class RandomDungeonGenerator : MonoBehaviour
                 int xOffset = x - previousPos.x;
                 int yOffset = y - previousPos.y;
                 int roomSize = 1; //Hallway size
-                                  // if (Random.Range(1, 100) <= roomRate)
-                                  // roomSize = Random.Range(3, 6);
+                // if (Random.Range(1, 100) <= roomRate)
+                //     roomSize = Random.Range(3, 6);
                 previousPos = new Vector2Int(x, y);
 
                 //Go Straight
@@ -292,6 +303,7 @@ public class RandomDungeonGenerator : MonoBehaviour
                 }
 
                 if (!routeUsed)
+                // else
                 {
                     x = previousPos.x + xOffset;
                     y = previousPos.y + yOffset;
