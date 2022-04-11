@@ -208,7 +208,7 @@ public class PlayerBehavior : MonoBehaviour
         isInvincible = true;
         Blink();
 
-        cam.transform.DOShakePosition(0.2f, 0.1f, 20, 90, false, true);
+        cam.transform.DOShakePosition(0.2f, 0.3f, 20, 90, false, true);
         HP -= Mathf.Max(1, damage - defendence);
         Invoke("ResetInvincible", 1f);
     }

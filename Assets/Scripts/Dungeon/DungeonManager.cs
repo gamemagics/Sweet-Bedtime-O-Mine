@@ -21,6 +21,7 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private AudioClip deep;
     [SerializeField] private AudioClip normal;
     [SerializeField] private AudioClip rem;
+    [SerializeField] private CircleTransition transition;
 
     private GameObject currentRoom = null;
 
@@ -37,7 +38,7 @@ public class DungeonManager : MonoBehaviour
     private System.Random random;
 
     [SerializeField]
-    private int monstersCount = 3;
+    private int monstersCount;
     bool isDigitalClock = false;
     bool hasDigitalClock = false;
 
@@ -64,11 +65,14 @@ public class DungeonManager : MonoBehaviour
 
     public void GoNextRoom()
     {
+        // transition.gameObject.SetActive(true);
+        transition.CloseBlackScreen();
+        transition.OpenBlackScreen();
         if (random.Next(0, 100) < 20)
         {
             generator.Clear();
             GenerateBonus();
-            player.transform.position.Set(0, 0, 0);
+            player.gameObject.transform.position = new Vector3(0, 0, 0);
             Debug.Log("player.transform.position: " + player.transform.position);
             return;
         }
@@ -90,6 +94,7 @@ public class DungeonManager : MonoBehaviour
             if (layer == 1)
             {
                 EndUI.isHappy = true;
+                transition.gameObject.SetActive(false);
                 SceneManager.LoadScene(2);
             }
             else

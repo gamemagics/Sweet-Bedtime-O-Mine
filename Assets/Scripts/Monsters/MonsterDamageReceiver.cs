@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MonsterDamageReceiver : MonoBehaviour
 {
@@ -8,8 +9,14 @@ public class MonsterDamageReceiver : MonoBehaviour
     [SerializeField] private int maxHP = 1;
     [SerializeField] private int HP = 1;
     [SerializeField] private bool isBoss = false;
+    [SerializeField] private GameObject effect;
+    [SerializeField] private Camera cam;
     // private float dazedTime;
     // public float startDazedTime;
+    void Awake()
+    {
+        cam = Camera.main;
+    }
     void Update()
     {
         // if(dazedTime<=0){
@@ -39,6 +46,8 @@ public class MonsterDamageReceiver : MonoBehaviour
         Invoke("ResetColor", 0.1f);
         if (HP <= 0)
         {
+            cam.transform.DOShakePosition(0.2f, 0.3f, 20, 90, false, true);
+            Instantiate(effect, transform.parent.position, Quaternion.identity);
             if (isBoss)
             {
                 BossManager.Instance.Clear();

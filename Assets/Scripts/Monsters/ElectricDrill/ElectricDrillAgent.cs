@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricDrillAgent : MonoBehaviour {
-    private enum ElectricDrillState {
+public class ElectricDrillAgent : MonoBehaviour
+{
+    private enum ElectricDrillState
+    {
         IDLE, RUSH
     }
 
@@ -18,13 +20,16 @@ public class ElectricDrillAgent : MonoBehaviour {
 
     private Vector2 direction = Vector2.left;
 
-    void Awake() {
+    void Awake()
+    {
         animator = GetComponent<Animator>();
         animator.SetFloat("Interval", -1);
     }
 
-    void Update() {
-        switch (state) {
+    void Update()
+    {
+        switch (state)
+        {
             case ElectricDrillState.IDLE:
                 UpdateIdle();
                 break;
@@ -34,69 +39,88 @@ public class ElectricDrillAgent : MonoBehaviour {
         }
     }
 
-    void UpdateIdle() {
+    void UpdateIdle()
+    {
         float interval = animator.GetFloat("Interval");
-        if (interval >= 0) {
+        if (interval >= 0)
+        {
             interval -= Time.deltaTime;
-            if (interval <= 0) {
+            if (interval <= 0)
+            {
                 animator.SetFloat("Interval", -1);
             }
-            else {
+            else
+            {
                 animator.SetFloat("Interval", interval);
             }
         }
-        else if (player != null) {
+        else if (player != null)
+        {
             Vector3 dir = player.transform.position - transform.position;
             dir.Normalize();
             var res = Physics2D.RaycastAll(transform.position, dir);
             bool flag = true;
-            if (res != null) {
-                for (int i = 0; i < res.Length; ++i) {
+            if (res != null)
+            {
+                for (int i = 0; i < res.Length; ++i)
+                {
                     RaycastHit2D hit = res[i];
-                    if (hit.transform.gameObject.tag.Contains("Enemy")) {
+                    if (hit.transform.gameObject.tag.Contains("Enemy"))
+                    {
                         continue;
                     }
-                    else if (hit.transform.gameObject.tag == "Player") {
+                    else if (hit.transform.gameObject.tag == "Player")
+                    {
                         break;
                     }
-                    else {
-                        Debug.Log(hit.transform.gameObject.name);
+                    else
+                    {
+                        // Debug.Log(hit.transform.gameObject.name);
                         flag = false;
                         break;
                     }
                 }
             }
 
-            if (flag) {
+            if (flag)
+            {
                 direction = (transform.position.x >= player.transform.position.x) ? Vector2.left : Vector2.right;
                 animator.SetBool("FoundPlayer", true);
                 state = ElectricDrillState.RUSH;
             }
-            
+
         }
     }
 
-    void UpdateRush() {
+    void UpdateRush()
+    {
         transform.Translate(direction * SPEED * Time.deltaTime);
-        if (direction.x * transform.localScale.x > 0) {
+        if (direction.x * transform.localScale.x > 0)
+        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = collider.gameObject;
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider) {
-        if (collider.gameObject.tag == "Player") {
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
             player = null;
         }
     }
 
-    public void Stop() {
-        if (state == ElectricDrillState.RUSH) {
+    public void Stop()
+    {
+        if (state == ElectricDrillState.RUSH)
+        {
             animator.SetFloat("Interval", COLD_DOWN);
             state = ElectricDrillState.IDLE;
         }

@@ -65,4 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb23c917ecae6a9449da2e3238864066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 1
   HP: 0
+  isBoss: 0
+  effect: {fileID: 3659178724351408688, guid: 0456570e371d14e58b611dc9e1118f29, type: 3}
+  cam: {fileID: 0}
