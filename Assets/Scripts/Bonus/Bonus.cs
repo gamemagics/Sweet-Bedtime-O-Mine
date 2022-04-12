@@ -14,6 +14,7 @@ public class Bonus : MonoBehaviour
     private BonusData current;
 
     private bool done = false;
+    [SerializeField] GameObject shiningEffect;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class Bonus : MonoBehaviour
     {
         if (done)
         {
+            DestroyImmediate(shiningEffect);
             DestroyImmediate(gameObject);
         }
     }

@@ -18,6 +18,7 @@ public class CircleTransition : MonoBehaviour
     void Start()
     {
         DrawBlackScreen();
+        blackScreen.material.SetFloat("_Radius", 1);
     }
 
     // Update is called once per frame

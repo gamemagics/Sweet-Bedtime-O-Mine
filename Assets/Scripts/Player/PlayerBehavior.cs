@@ -29,6 +29,8 @@ public class PlayerBehavior : MonoBehaviour
     private bool isInvincible = false;
     [SerializeField] private float hurtForce = 0.5f;
     [SerializeField] private Camera cam;
+    [SerializeField] private GameObject effect;
+    private bool isDead;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +44,11 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (HP <= 0)
         {
-            EndUI.isHappy = false;
-            SceneManager.LoadScene(2);
+            if (!isDead)
+            {
+                StartCoroutine(PlayGameOver());
+                isDead = true;
+            }
         }
 
         HPBar.transform.localPosition = new Vector3((float)HP / MAX_HP * INIT_X,
@@ -227,5 +232,21 @@ public class PlayerBehavior : MonoBehaviour
         seq.Append(sprite.DOColor(new Color32(0, 0, 0, 0), 0.1f));
         seq.Append(sprite.DOColor(Color.white, 0.1f));
         seq.SetLoops(5);
+    }
+    private IEnumerator PlayGameOver()
+    {
+        HintUI hint = GameObject.FindGameObjectWithTag("Hint").GetComponent<HintUI>();
+        hint.ShowHint("Oops... You failed.");
+
+        transform.DOShakePosition(1f, 1f, 20, 90, false, true).onComplete = () =>
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            Instantiate(effect, transform.position, Quaternion.identity);
+        };
+        isInvincible = true;
+        // yield return new WaitUntil(() => effect.GetComponent<ParticleSystem>().isStopped);
+        yield return new WaitForSeconds(2.5f);
+        EndUI.isHappy = false;
+        SceneManager.LoadScene(2);
     }
 }

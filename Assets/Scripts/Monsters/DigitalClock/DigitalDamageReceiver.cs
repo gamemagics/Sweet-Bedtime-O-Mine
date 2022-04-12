@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class HitEvent : UnityEvent<int> { }
 
@@ -14,6 +15,12 @@ public class DigitalDamageReceiver : MonoBehaviour
     public int index = 0;
 
     public bool damagable = true;
+    [SerializeField] private GameObject effect;
+    [SerializeField] private Camera cam;
+    void Awake()
+    {
+        cam = Camera.main;
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {

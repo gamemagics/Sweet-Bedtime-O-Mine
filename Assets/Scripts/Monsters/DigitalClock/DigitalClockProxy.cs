@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class DigitalClockProxy : MonoBehaviour {
-    public enum DigitalClockColor {
+public class DigitalClockProxy : MonoBehaviour
+{
+    public enum DigitalClockColor
+    {
         RED = 0, YELLOW = 1, BLUE = 2
     }
 
@@ -12,9 +15,16 @@ public class DigitalClockProxy : MonoBehaviour {
     private List<GameObject> clocks = new List<GameObject>();
     private List<int> order = new List<int>();
     private static readonly int MAX_HP = 5;
+    private Camera cam;
+    void Awake()
+    {
+        cam = Camera.main;
+    }
 
-    public void InitByColor(DigitalClockColor color, Vector2[] positions) {
-        for (int i = 0; i < positions.Length; ++i) {
+    public void InitByColor(DigitalClockColor color, Vector2[] positions)
+    {
+        for (int i = 0; i < positions.Length; ++i)
+        {
             GameObject clock = GameObject.Instantiate<GameObject>(digitalClockPrefabs[(int)color]);
             clock.transform.position = positions[i];
             clock.transform.parent = transform;
@@ -29,24 +39,37 @@ public class DigitalClockProxy : MonoBehaviour {
         }
     }
 
-    public void Shut(int index) {
+    public void Shut(int index)
+    {
         order.Add(index);
-        if (order.Count == clocks.Count) {
+        if (order.Count == clocks.Count)
+        {
             bool flag = true;
-            for (int i = 1; i < order.Count; ++i) {
-                if (order[i] < order[i - 1]) {
+            for (int i = 1; i < order.Count; ++i)
+            {
+                if (order[i] < order[i - 1])
+                {
                     flag = false;
                     break;
                 }
             }
 
-            if (flag) {
+            if (flag)
+            {
+                float size = cam.orthographicSize;
+                cam.DOOrthoSize(size * 1.2f, 0.1f).onComplete = () =>
+                {
+                    cam.DOOrthoSize(size, 0.1f);
+                };
+                // Instantiate(effect, transform.parent.position, Quaternion.identity);
                 DungeonManager.Instance.ReportDeath();
                 Destroy(gameObject);
             }
-            else {
+            else
+            {
                 order.Clear();
-                foreach (GameObject clock in clocks) {
+                foreach (GameObject clock in clocks)
+                {
                     var agent = clock.GetComponent<DigitalClockAgent>();
                     agent.Reset();
 

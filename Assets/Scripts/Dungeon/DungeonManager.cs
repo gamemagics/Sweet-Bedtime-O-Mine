@@ -65,17 +65,15 @@ public class DungeonManager : MonoBehaviour
 
     public void GoNextRoom()
     {
-        // transition.gameObject.SetActive(true);
         transition.CloseBlackScreen();
         transition.OpenBlackScreen();
-        if (random.Next(0, 100) < 20)
-        {
-            generator.Clear();
-            GenerateBonus();
-            player.gameObject.transform.position = new Vector3(0, 0, 0);
-            Debug.Log("player.transform.position: " + player.transform.position);
-            return;
-        }
+        // if (random.Next(0, 100) < 20)
+        // {
+        //     generator.Clear();
+        //     GenerateBonus();
+        //     player.gameObject.transform.position = new Vector3(0, 0, 0);
+        //     return;
+        // }
         int groundTilesCount = 0;
         if (currentRoom != null)
         {
