@@ -27,9 +27,10 @@ public class PendulumAgent : MonoBehaviour
     [SerializeField] private GameObject bombPrefab = null;
 
     private Vector2 attackPoint = Vector2.zero;
-
+    private GameObject player;
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         random = new System.Random(System.DateTime.Now.Second);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -113,7 +114,10 @@ public class PendulumAgent : MonoBehaviour
             p *= ATTACK_RANGE * (float)random.NextDouble();
 
             GameObject bomb = GameObject.Instantiate<GameObject>(bombPrefab);
+            Vector2 direction = player.transform.position - transform.position;
             bomb.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            AudioManager.Instance.ThrowAudio();
+            bomb.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
             bomb.GetComponentInChildren<Explore>().target = new Vector2(transform.position.x + p.x, transform.position.y + p.y);
             bomb.name = "bomb";
             bomb.tag = "EnemyAttack";

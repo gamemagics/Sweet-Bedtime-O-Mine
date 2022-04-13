@@ -26,17 +26,19 @@ public class DigitalDamageReceiver : MonoBehaviour
     {
         if (damagable && collider.tag == "PlayerAttack")
         {
-            AudioManager.Instance.MonsterHurtAudio();
-            GetComponentInParent<SpriteRenderer>().color = Color.red;
-            Invoke("ResetColor", 0.1f);
-
-            int dmg = collider.gameObject.GetComponent<ProjectileBehavior>().damage;
-            HP -= dmg;
-            if (HP <= 0)
-            {
-                damagable = false;
-                OnShutDown.Invoke(index);
-            }
+            TakeDamage(collider.gameObject.GetComponent<ProjectileBehavior>().damage);
+        }
+    }
+    public void TakeDamage(int dmg)
+    {
+        AudioManager.Instance.MonsterHurtAudio();
+        GetComponentInParent<SpriteRenderer>().color = Color.red;
+        Invoke("ResetColor", 0.1f);
+        HP -= dmg;
+        if (HP <= 0)
+        {
+            damagable = false;
+            OnShutDown.Invoke(index);
         }
     }
     private void ResetColor()

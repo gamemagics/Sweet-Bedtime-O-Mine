@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 835364435787688848}
   m_Layer: 8
   m_Name: DigitalClock
-  m_TagString: Untagged
+  m_TagString: EnemySearch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

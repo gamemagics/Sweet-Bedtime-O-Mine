@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3373461900179864329}
   - component: {fileID: 3930613873309164336}
   - component: {fileID: 4189691026660405556}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 8193149467501018888}
   - component: {fileID: 695964896382852934}
   - component: {fileID: 2480725625524059890}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DigitalDamageReceiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,6 +584,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CollideDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451287179213333354, guid: bbb5b584690c84df6afb2bd93f33f8b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb5b584690c84df6afb2bd93f33f8b0, type: 3}

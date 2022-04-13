@@ -24,14 +24,9 @@ public class CircleTransition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OpenBlackScreen();
-        }
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            CloseBlackScreen();
-        }
+        // if (blackScreen.material.GetFloat("_Radius") == 1)
+        // {
+        // }
     }
     private void DrawBlackScreen()
     {
@@ -73,6 +68,7 @@ public class CircleTransition : MonoBehaviour
 
     private IEnumerator Transition(float duration, float beginRadius, float endRadius)
     {
+        blackScreen.gameObject.SetActive(true);
         var time = 0f;
         while (time <= duration)
         {
@@ -82,16 +78,22 @@ public class CircleTransition : MonoBehaviour
 
             blackScreen.material.SetFloat("_Radius", radius);
 
-            // yield return new WaitForSeconds(duration);
             yield return null;
         }
+        // yield return new WaitForSeconds(duration);
     }
     public void OpenBlackScreen()
     {
         StartCoroutine(Transition(1f, 0f, 1f));
+        Invoke("DisableBlackScreen", 1f);
     }
     public void CloseBlackScreen()
     {
         StartCoroutine(Transition(1f, 1f, 0f));
+        Invoke("DisableBlackScreen", 1f);
+    }
+    private void DisableBlackScreen()
+    {
+        blackScreen.gameObject.SetActive(false);
     }
 }

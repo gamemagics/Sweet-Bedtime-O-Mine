@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6424734458344013546}
   m_Layer: 8
   m_Name: DigitalClockR
-  m_TagString: Untagged
+  m_TagString: EnemySearch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 8930734176397363405}
   - component: {fileID: 5451345247531206747}
   - component: {fileID: 4228559359744698029}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 5394260941276225480}
   - component: {fileID: 5068921833802062935}
   - component: {fileID: 1843986987281519168}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DigitalDamageReceiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,6 +584,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CollideDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451287179213333354, guid: bbb5b584690c84df6afb2bd93f33f8b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb5b584690c84df6afb2bd93f33f8b0, type: 3}

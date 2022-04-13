@@ -82,6 +82,7 @@ public class DungeonManager : MonoBehaviour
         }
 
         bool generateMonster = true;
+        player.transform.position = Vector2.zero;
 
         if (isBoss)
         {
@@ -108,6 +109,8 @@ public class DungeonManager : MonoBehaviour
             audioSource.Play();
             isBoss = true;
             GameObject bossRoom = GameObject.Instantiate<GameObject>(bossPrefab[layer]);
+            Vector3 startPos = GameObject.FindGameObjectWithTag("StartPos").gameObject.transform.position;
+            player.gameObject.transform.position = startPos;
             bossRoom.transform.position = Vector3.zero;
             grid.gameObject.SetActive(false);
         }
@@ -126,7 +129,6 @@ public class DungeonManager : MonoBehaviour
 
         }
 
-        player.transform.position = Vector2.zero;
         surface2D.BuildNavMesh();
 
         if (generateMonster)
@@ -260,6 +262,10 @@ public class DungeonManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 

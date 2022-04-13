@@ -10,6 +10,7 @@ TagManager:
   - Hint
   - PlayerAttack
   - Wall
+  - StartPos
   layers:
   - Default
   - TransparentFX

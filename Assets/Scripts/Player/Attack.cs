@@ -14,8 +14,7 @@ public class Attack : MonoBehaviour
     public float attackRate = 0.5f;
     private float nextAttack;
 
-    public Transform attackPos;
-    public float attackRange = 0.5f;
+    public float attackRange;
     public LayerMask enemyLayers;
     private GameObject projectile;
     private GameObject attackEffect;
@@ -35,36 +34,82 @@ public class Attack : MonoBehaviour
             Invoke("ChangeSprite", 0.2f);
             Invoke("DestroyEffect", 0.3f);
 
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, enemyLayers);
-            foreach (Collider2D enemy in enemiesToDamage)
+            List<GameObject> enemy = GetClosestEnemy();
+            if (enemy != null)
             {
-                var receiver = enemy.GetComponentInChildren<MonsterDamageReceiver>();
-                if (receiver != null)
+                foreach (GameObject enemyObj in enemy)
                 {
-                    receiver.TakeDamage(damage);
+                    var receiver = enemyObj.GetComponentInChildren<MonsterDamageReceiver>();
+                    if (receiver != null)
+                    {
+                        // AudioManager.Instance.AttackAudio();
+                        Debug.Log("Hit enemy: " + enemyObj.name);
+                        receiver.TakeDamage(damage * 2);
+                    }
+                    else
+                    {
+                        var digitalReceiver = enemyObj.GetComponentInChildren<DigitalDamageReceiver>();
+                        if (digitalReceiver != null)
+                        {
+                            // AudioManager.Instance.AttackAudio();
+                            Debug.Log("Hit enemy: " + enemyObj.name);
+                            digitalReceiver.TakeDamage(damage * 2);
+                        }
+                    }
                 }
             }
+        }
+    }
+    private List<GameObject> GetClosestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemySearch");
+        if (enemies == null)
+        {
+            return null;
+        }
+        List<GameObject> closest = new List<GameObject>();
+        Vector3 position = new Vector3(GetAttackPos().x, GetAttackPos().y, 0);
+        foreach (GameObject enemy in enemies)
+        {
+            if (Vector3.Distance(position, enemy.transform.position) > attackRange)
+            {
+                continue;
+            }
+            closest.Add(enemy);
+        }
+        return closest;
+    }
+    private Vector2 GetAttackPos()
+    {
+        Vector2 direction = this.GetComponent<PlayerBehavior>().GetDirection();
+        if (direction.x == 1 && direction.y == 0)
+        {
+            return new Vector2(transform.position.x + GetPosition().x / 2, transform.position.y);
+        }
+        else if (direction.x == -1 && direction.y == 0)
+        {
+            return new Vector2(transform.position.x - GetPosition().x / 2, transform.position.y);
+        }
+        else if (direction.x == 0 && direction.y == 1)
+        {
+            return new Vector2(transform.position.x, transform.position.y + GetPosition().y / 2);
+        }
+        else if (direction.x == 0 && direction.y == -1)
+        {
+            return new Vector2(transform.position.x, transform.position.y - GetPosition().y / 2);
+        }
+        else
+        {
+            return new Vector2(transform.position.x, transform.position.y);
         }
     }
     private void Shoot()
     {
         Vector2 direction = this.GetComponent<PlayerBehavior>().GetDirection();
-        if (direction.x == 1 && direction.y == 0)
-        {
-            projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x + GetPosition().x / 2, transform.position.y), Quaternion.identity);
-        }
-        else if (direction.x == -1 && direction.y == 0)
-        {
-            projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x - GetPosition().x / 2, transform.position.y), Quaternion.identity);
-        }
-        else if (direction.x == 0 && direction.y == 1)
-        {
-            projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x, transform.position.y + GetPosition().y / 2), Quaternion.identity);
-        }
-        else if (direction.x == 0 && direction.y == -1)
-        {
-            projectile = Instantiate(projectilePrefab, new Vector2(transform.position.x, transform.position.y - GetPosition().y / 2), Quaternion.identity);
-        }
+        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+        projectile = Instantiate(projectilePrefab, GetAttackPos(), rotation);
+        // AudioManager.Instance.ShootAudio();
+
         if (projectile != null)
         {
             projectile.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f).From(Vector3.zero);
@@ -81,7 +126,12 @@ public class Attack : MonoBehaviour
     }
     private void ShowEffect()
     {
-        attackEffect = Instantiate(attackEffectPrefab, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        Vector2 direction = GetComponent<PlayerBehavior>().GetDirection();
+        if (direction.y != 1)
+        {
+            attackEffect = Instantiate(attackEffectPrefab, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            attackEffect.GetComponent<SpriteRenderer>().sortingOrder = 11;
+        }
     }
     private void ChangeSprite()
     {
@@ -92,9 +142,5 @@ public class Attack : MonoBehaviour
     {
         if (attackEffect != null)
             Destroy(attackEffect);
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 }

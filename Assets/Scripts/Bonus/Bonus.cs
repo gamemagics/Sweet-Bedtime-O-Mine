@@ -34,6 +34,7 @@ public class Bonus : MonoBehaviour
     {
         if (done)
         {
+            AudioManager.Instance.CollectAudio();
             DestroyImmediate(shiningEffect);
             DestroyImmediate(gameObject);
         }

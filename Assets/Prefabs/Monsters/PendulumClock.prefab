@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3201613417448437778}
   m_Layer: 8
   m_Name: PendulumClock
-  m_TagString: Untagged
+  m_TagString: EnemySearch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -121,6 +121,7 @@ public class TrumpetAgent : MonoBehaviour
 
             direction.Normalize();
             trumpetAttack.Attack(direction);
+            // AudioManager.Instance.TrumpetAudio();
         }
     }
 

@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource audioSource;
     [SerializeField]
-    private AudioClip shootAudio, hurtAudio, attackAudio, collectAudio, monsterHurtAudio;
+    private AudioClip shootAudio, hurtAudio, attackAudio, collectAudio, monsterHurtAudio, deadAudio, trumpetAudio, throwAudio;
 
     private void Awake()
     {
@@ -49,6 +49,21 @@ public class AudioManager : MonoBehaviour
     public void MonsterHurtAudio()
     {
         audioSource.clip = monsterHurtAudio;
+        audioSource.Play();
+    }
+    public void DeadAudio()
+    {
+        audioSource.clip = deadAudio;
+        audioSource.Play();
+    }
+    public void TrumpetAudio()
+    {
+        audioSource.clip = trumpetAudio;
+        audioSource.Play();
+    }
+    public void ThrowAudio()
+    {
+        audioSource.clip = throwAudio;
         audioSource.Play();
     }
 }

@@ -212,6 +212,7 @@ public class PlayerBehavior : MonoBehaviour
         if (isInvincible) return;
         isInvincible = true;
         Blink();
+        AudioManager.Instance.HurtAudio();
 
         cam.transform.DOShakePosition(0.2f, 0.3f, 20, 90, false, true);
         HP -= Mathf.Max(1, damage - defendence);
@@ -237,8 +238,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         HintUI hint = GameObject.FindGameObjectWithTag("Hint").GetComponent<HintUI>();
         hint.ShowHint("Oops... You failed.");
+        AudioManager.Instance.DeadAudio();
 
-        transform.DOShakePosition(1f, 1f, 20, 90, false, true).onComplete = () =>
+        transform.DOShakePosition(1f, 1f, 10, 90, false, true).onComplete = () =>
         {
             GetComponent<SpriteRenderer>().enabled = false;
             Instantiate(effect, transform.position, Quaternion.identity);
